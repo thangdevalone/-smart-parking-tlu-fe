@@ -1,14 +1,12 @@
 import {
-  Tag,
-  Users,
-  Settings,
   Bookmark,
-  SquarePen,
+  HandCoins,
+  IdCard,
   LayoutGrid,
   LucideIcon,
-  HandCoins,
   MapPin,
-  IdCard,
+  Settings,
+  Users
 } from 'lucide-react';
 
 type Submenu = {
