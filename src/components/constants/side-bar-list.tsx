@@ -6,7 +6,7 @@ import {
   LucideIcon,
   MapPin,
   Settings,
-  Users
+  Users,
 } from 'lucide-react';
 
 type Submenu = {
@@ -34,7 +34,7 @@ export function SideBarList(pathname: string): Group[] {
       groupLabel: '',
       menus: [
         {
-          href: '/dashboard',
+          href: '/admin/dashboard',
           label: 'Tổng quan',
           active: pathname.includes('/dashboard'),
           icon: LayoutGrid,
@@ -52,51 +52,51 @@ export function SideBarList(pathname: string): Group[] {
           icon: Users,
           submenus: [
             {
-              href: '/students',
+              href: '/admin/students',
               label: 'Sinh viên',
               active: pathname === '/students',
             },
             {
-              href: '/guards',
+              href: '/admin/guards',
               label: 'Bảo vệ',
               active: pathname === '/guards',
             },
           ],
         },
         {
-          href: '/car-park',
+          href: '/admin/car-card',
           label: 'Thẻ gửi xe',
-          active: pathname.includes('/car-park'),
+          active: pathname.includes('/car-card'),
           icon: IdCard,
           submenus: [],
         },
         {
-          href: '/car-park',
+          href: '/admin/car-park',
           label: 'Chỗ để xe',
           active: pathname.includes('/car-park'),
           icon: MapPin,
           submenus: [],
         },
         {
-          href: '/categories',
+          href: '/admin/categories',
           label: 'Danh mục hình ảnh',
           active: pathname.includes('/categories'),
           icon: Bookmark,
           submenus: [],
         },
         {
-          href: '/payment',
+          href: '/admin/payment',
           label: 'Chi trả',
           active: pathname.includes('/payment'),
           icon: HandCoins,
           submenus: [
             {
-              href: '/pay',
+              href: '/admin/payment/pay',
               label: 'Thanh toán',
               active: pathname === '/pay',
             },
             {
-              href: '/bills',
+              href: '/admin/payment/bills',
               label: 'Hóa đơn',
               active: pathname === '/bills',
             },
@@ -108,9 +108,9 @@ export function SideBarList(pathname: string): Group[] {
       groupLabel: 'Settings',
       menus: [
         {
-          href: '/account',
+          href: '/admin/account',
           label: 'Account',
-          active: pathname.includes('/account'),
+          active: pathname.includes('/admin/account'),
           icon: Settings,
           submenus: [],
         },

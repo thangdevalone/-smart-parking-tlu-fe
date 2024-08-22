@@ -18,6 +18,12 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'auth-illu': "url('/background-auth')",
+        'auth-intro': "url('/intro-01.jpg')",
+        'auth-intro-2': "url('/intro-01-dark.jpg')"
+
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
