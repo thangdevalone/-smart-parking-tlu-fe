@@ -1,4 +1,3 @@
-// themeStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -18,8 +17,8 @@ const useAppStore = create<AppState>()(
     }),
     {
       name: 'app-storage',
-    }
-  )
+    },
+  ),
 );
 
 export default useAppStore;

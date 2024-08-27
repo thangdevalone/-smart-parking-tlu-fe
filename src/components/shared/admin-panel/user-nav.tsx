@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,10 +10,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { LayoutGrid, LogOut, User } from 'lucide-react';
+import { LayoutGrid, LogOut, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import defaultAvatar from '@/assets/default-avatar.png';
+import useAuthStore from '@/store/auth-store.ts';
 
 export function UserNav() {
+  const { user, signOut } = useAuthStore();
   return (
     <DropdownMenu>
       <Tooltip delayDuration={100}>
@@ -21,8 +24,7 @@ export function UserNav() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="#" alt="Avatar" />
-                <AvatarFallback className="bg-transparent">JD</AvatarFallback>
+                <AvatarImage src={defaultAvatar} alt="Avatar" />
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
@@ -32,8 +34,8 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">John Doe</p>
-            <p className="text-xs leading-none text-muted-foreground">johndoe@example.com</p>
+            <p className="text-sm font-medium leading-none">{user?.fullName}</p>
+            <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -45,14 +47,14 @@ export function UserNav() {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="hover:cursor-pointer" asChild>
-            <Link to="/account" className="flex items-center">
-              <User className="w-4 h-4 mr-3 text-muted-foreground" />
-              Account
+            <Link to="/settings" className="flex items-center">
+              <Settings className="w-4 h-4 mr-3 text-muted-foreground" />
+              Settings
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="hover:cursor-pointer" onClick={() => {}}>
+        <DropdownMenuItem className="hover:cursor-pointer" onClick={() => signOut()}>
           <LogOut className="w-4 h-4 mr-3 text-muted-foreground" />
           Sign out
         </DropdownMenuItem>

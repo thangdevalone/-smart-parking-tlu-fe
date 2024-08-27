@@ -75,9 +75,8 @@ export function CollapseMenuButton({
             key={index}
             variant={active ? 'secondary' : 'ghost'}
             className="w-full justify-start h-10 mb-1"
-            asChild
           >
-            <Link to={href}>
+            <Link className='w-full  flex flex-row gap-2' to={href}>
               <span className="mr-4 ml-2">
                 <Dot size={18} />
               </span>

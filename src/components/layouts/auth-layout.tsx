@@ -1,12 +1,15 @@
 import { Logo } from '@/special-assets';
 import { Link, Outlet } from 'react-router-dom';
+
 export function AuthLayout() {
   return (
-    <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative bg-auth-intro dark:bg-auth-intro-2 bg-cover hidden h-full flex-col bg-muted p-10 text-white  lg:flex">
-        <div className="relative z-20 w-[200px] flex items-center text-lg font-medium">
+    <div
+      className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div
+        className="relative bg-auth-intro dark:bg-auth-intro-2 bg-cover hidden h-full flex-col bg-muted p-10 text-white  lg:flex">
+        <Link to="/" className="relative z-20 w-[200px] flex items-center text-lg font-medium cursor-pointer">
           <Logo />
-        </div>
+        </Link>
         <div className="-m-10  mt-auto  bg-gradient-to-t from-black/80 to-transparent">
           <div className="relative p-10 ">
             <blockquote className="space-y-2">

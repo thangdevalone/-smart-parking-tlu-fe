@@ -1,9 +1,11 @@
-import { MenuIcon, PanelsTopLeft } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetHeader, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { Link } from 'react-router-dom';
 import { Menu } from './menu';
+import { cn } from '@/lib/utils.ts';
+import { Logo } from '@/special-assets';
 
 export function SheetMenu() {
   return (
@@ -15,14 +17,16 @@ export function SheetMenu() {
       </SheetTrigger>
       <SheetContent className="sm:w-72 px-3 h-full flex flex-col" side="left">
         <SheetHeader>
-          <Button className="flex justify-center items-center pb-2 pt-1" variant="link" asChild>
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <PanelsTopLeft className="w-6 h-6 mr-1" />
-              <h1 className="font-bold text-lg">Brand</h1>
+          <div>
+            <Link to="/" className={cn(
+              'transition-transform w-fit ease-in-out duration-300 mb-1',
+              buttonVariants({ variant: 'link' }),
+            )}>
+              <div className="w-[150px]"><Logo /></div>
             </Link>
-          </Button>
+          </div>
         </SheetHeader>
-        <Menu isOpen />
+        <Menu isOpen={true} />
       </SheetContent>
     </Sheet>
   );

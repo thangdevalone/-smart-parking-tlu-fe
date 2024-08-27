@@ -1,11 +1,13 @@
 import { cn } from '@/lib/utils';
 import { Ellipsis, LogOut } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { SideBarList } from '../../constants';
-import { Button } from '../../ui/button';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { SideBarList } from '../../../constants';
+import { Button, buttonVariants } from '../../ui/button';
 import { ScrollArea } from '../../ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../ui/tooltip';
 import { CollapseMenuButton } from './collapse-menu-button';
+import { RoleInApp } from '@/types';
+import useAuthStore from '@/store/auth-store.ts';
 
 interface MenuProps {
   isOpen: boolean | undefined;
@@ -13,19 +15,22 @@ interface MenuProps {
 
 export function Menu({ isOpen }: MenuProps) {
   const { pathname } = useLocation();
-  const menuList = SideBarList(pathname);
+  const { role } = useParams();
+  const { signOut } = useAuthStore();
+  const menuList = SideBarList(pathname, role as Exclude<RoleInApp, RoleInApp.GUARD>);
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block">
+    <ScrollArea className="[&>div>div[style]]:!block px-3">
       <nav className="mt-8 h-full w-full">
-        <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
+        <ul
+          className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
           {menuList.map(({ groupLabel, menus }, index) => (
             <li className={cn('w-full', groupLabel ? 'pt-5' : '')} key={index}>
               {(isOpen && groupLabel) || isOpen === undefined ? (
                 <p className="text-sm font-medium text-muted-foreground px-4 pb-2 max-w-[248px] truncate">
                   {groupLabel}
                 </p>
-              ) : !isOpen && isOpen !== undefined && groupLabel ? (
+              ) : !isOpen && true && groupLabel ? (
                 <Tooltip delayDuration={100}>
                   <TooltipTrigger className="w-full">
                     <div className="w-full flex justify-center items-center">
@@ -44,27 +49,22 @@ export function Menu({ isOpen }: MenuProps) {
                   <div className="w-full" key={index}>
                     <Tooltip delayDuration={100}>
                       <TooltipTrigger asChild>
-                        <Button
-                          variant={active ? 'secondary' : 'ghost'}
-                          className="w-full justify-start h-10 mb-1"
-                          asChild
-                        >
-                          <Link to={href}>
+                        <Link to={href}
+                              className={cn('w-full !justify-start !h-10 mb-1', buttonVariants({ variant: active ? 'secondary' : 'ghost' }))}>
                             <span className={cn(isOpen === false ? '' : 'mr-4')}>
                               <Icon size={18} />
                             </span>
-                            <p
-                              className={cn(
-                                'max-w-[200px] truncate',
-                                isOpen === false
-                                  ? '-translate-x-96 opacity-0'
-                                  : 'translate-x-0 opacity-100'
-                              )}
-                            >
-                              {label}
-                            </p>
-                          </Link>
-                        </Button>
+                          <p
+                            className={cn(
+                              'max-w-[200px] truncate',
+                              isOpen === false
+                                ? '-translate-x-96 opacity-0'
+                                : 'translate-x-0 opacity-100',
+                            )}
+                          >
+                            {label}
+                          </p>
+                        </Link>
                       </TooltipTrigger>
                       {isOpen === false && <TooltipContent side="right">{label}</TooltipContent>}
                     </Tooltip>
@@ -79,15 +79,15 @@ export function Menu({ isOpen }: MenuProps) {
                       isOpen={isOpen}
                     />
                   </div>
-                )
+                ),
               )}
             </li>
           ))}
-          <li className="w-full grow flex items-end">
+          <li className="w-full px-3 grow flex items-end">
             <Tooltip delayDuration={100}>
               <TooltipTrigger asChild>
                 <Button
-                  onClick={() => {}}
+                  onClick={() => signOut()}
                   variant="outline"
                   className="w-full justify-center h-10 mt-5"
                 >
@@ -97,7 +97,7 @@ export function Menu({ isOpen }: MenuProps) {
                   <p
                     className={cn(
                       'whitespace-nowrap',
-                      isOpen === false ? 'opacity-0 hidden' : 'opacity-100'
+                      isOpen === false ? 'opacity-0 hidden' : 'opacity-100',
                     )}
                   >
                     Sign out
@@ -110,5 +110,6 @@ export function Menu({ isOpen }: MenuProps) {
         </ul>
       </nav>
     </ScrollArea>
-  );
+  )
+    ;
 }

@@ -1,4 +1,5 @@
 import { Navbar } from '../shared/admin-panel';
+import React from 'react';
 
 interface ContentLayoutProps {
   title: string;

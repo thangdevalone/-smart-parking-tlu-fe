@@ -10,7 +10,7 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 
-export const Dashboard = () => {
+const Dashboard = () => {
   return (
     <ContentLayout title="Dashboard">
       <Breadcrumb>
@@ -32,3 +32,4 @@ export const Dashboard = () => {
     </ContentLayout>
   );
 };
+export default Dashboard;
