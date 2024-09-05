@@ -12,10 +12,18 @@ export interface SuccessResponse<T> {
   path: string;
   message: string;
   status: number;
+  pagination?: Pagination;
   data: T;
 }
 
 export interface LoginResponse {
   tokens: Tokens;
   user: User;
+}
+
+export interface Pagination {
+  page: number;
+  totalPages: number;
+  totalItems: number;
+  hasNext: boolean;
 }

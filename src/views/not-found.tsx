@@ -44,7 +44,7 @@ const Title = () => (
         <div className="number">4</div>
       </div>
       <div className="subtitle">Oops. Looks like you took a wrong turn.</div>
-      <Link to="/" replace={true} className={cn('mt-5 !bg-white !text-black', buttonVariants({ variant: 'outline' }))}>Go home</Link>
+      <Link to="/" replace={true} className={cn('mt-5 !bg-white border-none !text-black', buttonVariants({ variant: 'outline' }))}>Go home</Link>
     </div>
   )
 ;

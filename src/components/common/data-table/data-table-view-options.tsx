@@ -10,15 +10,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { ConvertColumnIDs } from '@/constants';
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
 }
 
 export function DataTableViewOptions<TData>(props: DataTableViewOptionsProps<TData>) {
-  const {
-    table,
-  } = props;
+  const { table } = props;
+  console.log(table.getHeaderGroups()[0].headers[0].getContext());
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,17 +28,17 @@ export function DataTableViewOptions<TData>(props: DataTableViewOptionsProps<TDa
           className="ml-auto hidden h-8 lg:flex"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          Cấu hình
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuLabel>Chuyển đổi cột</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
           .filter(
             (column) =>
-              typeof column.accessorFn !== 'undefined' && column.getCanHide(),
+              column.getCanHide(),
           )
           .map((column) => {
             return (
@@ -46,9 +46,9 @@ export function DataTableViewOptions<TData>(props: DataTableViewOptionsProps<TDa
                 key={column.id}
                 className="capitalize"
                 checked={column.getIsVisible()}
-                onCheckedChange={(value: any) => column.toggleVisibility(!!value)}
+                onCheckedChange={(value: boolean) => column.toggleVisibility(value)}
               >
-                {column.id}
+                {ConvertColumnIDs[column.id]}
               </DropdownMenuCheckboxItem>
             );
           })}

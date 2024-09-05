@@ -20,13 +20,14 @@ import { DataTableToolbar } from '@/components/common/data-table/data-table-tool
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
+  data?: TData[];
 }
 
 export function CardTypeTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
   const {
     columns,
+    data = [],
   } = props;
-  const {data}
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -58,9 +59,9 @@ export function CardTypeTable<TData, TValue>(props: DataTableProps<TData, TValue
   });
 
   return (
-    <div className="space-y-4">
+    <div className="gap-4 h-full flex flex-col">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border">
+      <div className="rounded-md border flex-1">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

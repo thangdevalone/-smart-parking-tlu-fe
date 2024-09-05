@@ -3,6 +3,8 @@ import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { DataTableRowActions } from '@/components/common/data-table/data-table-row-actions.tsx';
 import { CardType } from '@/types/card.ts';
+import { ConvertColumnIDs } from '@/constants';
+import { format } from 'date-fns';
 
 export const cardTypeColumns: ColumnDef<CardType>[] = [
   {
@@ -32,16 +34,15 @@ export const cardTypeColumns: ColumnDef<CardType>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Id" />
+      <DataTableColumnHeader column={column} title="Mã" />
     ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
-    enableSorting: false,
-    enableHiding: false,
+
   },
   {
     accessorKey: 'cardTypeName',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Tên thẻ" />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypeName']} />
     ),
     cell: ({ row }) => <div>{row.getValue('cardTypeName')}</div>,
 
@@ -49,26 +50,27 @@ export const cardTypeColumns: ColumnDef<CardType>[] = [
   {
     accessorKey: 'cardTypePrice',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Giá" />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypePrice']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('cardTypeName')}</div>,
+    cell: ({ row }) => <div>{row.getValue('cardTypePrice')}</div>,
   },
   {
     accessorKey: 'createdAt',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Tạo lúc" />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['createdAt']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('createdAt')}</div>,
+    cell: ({ row }) => <div>{format(row.getValue('createdAt'), 'dd/MM/yyyy hh:mm:ss')}</div>,
   },
   {
     accessorKey: 'updatedAt',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Sửa lúc" />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['updatedAt']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('updatedAt')}</div>,
+    cell: ({ row }) => <div>{format(row.getValue('updatedAt'), 'dd/MM/yyyy hh:mm:ss')}</div>,
   },
   {
     id: 'actions',
+
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

@@ -1,8 +1,8 @@
 import axiosClient from '@/api/axiosClient.ts';
 
-export const CardApi = {
-  getCardType(param: string) {
-    const url = `/card-type${param}`;
-    return axiosClient.get(url);
+export const cardApi = {
+  async getCardType(param?: string) {
+    const url = `/card-type${param || ''}`;
+    return await axiosClient.get(url);
   },
 };

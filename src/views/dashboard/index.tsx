@@ -27,7 +27,7 @@ const Dashboard = () => {
         </BreadcrumbList>
       </Breadcrumb>
       <Card className="rounded-lg border-none mt-6">
-        <CardContent className="p-6">Here is Dashboard</CardContent>
+        <CardContent className="p-4">Here is Dashboard</CardContent>
       </Card>
     </ContentLayout>
   );

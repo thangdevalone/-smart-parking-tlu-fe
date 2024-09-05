@@ -67,6 +67,30 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground scroll-custom;
+  }
+  .scroll-custom::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+  }
+
+  /* Track */
+  .scroll-custom::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: hsl(var(--background));
+  }
+
+  /* Handle */
+  .dark .scroll-custom::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+  }
+  .scroll-custom::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* Handle on hover */
+  .scroll-custom::-webkit-scrollbar-thumb:hover {
+    background:  hsl(var(--muted-foreground));
   }
 }

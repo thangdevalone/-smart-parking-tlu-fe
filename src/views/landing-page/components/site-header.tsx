@@ -10,23 +10,23 @@ import { buttonVariants } from '@/components/ui/button.tsx';
 const menuItem = [
   {
     id: 1,
-    label: 'Features',
-    href: '/features',
+    label: 'Sponsor me',
+    href: 'https://www.facebook.com/thanglonguniversity',
   },
   {
     id: 2,
+    label: 'Social network',
+    href: 'https://www.facebook.com/thanglonguniversity',
+  },
+  {
+    id: 3,
     label: 'Pricing',
     href: '#',
   },
   {
-    id: 3,
-    label: 'Careers',
-    href: '#',
-  },
-  {
     id: 4,
-    label: 'Contact Us',
-    href: '#',
+    label: 'Login',
+    href: '/auth/login',
   },
 ];
 
@@ -106,17 +106,43 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto hidden md:flex h-full items-center">
-            <Link className="mr-6 text-sm" to="/login">
-              Log in
+            <Link
+              className={cn(
+                buttonVariants({ variant: 'link' }),
+                'mr-2 text-sm',
+              )}
+              target='_blank'
+              to="https://www.facebook.com/thanglonguniversity"
+            >
+              Sponsor me
             </Link>
             <Link
               className={cn(
-                buttonVariants({ variant: 'secondary' }),
-                'mr-6 text-sm',
+                buttonVariants({ variant: 'link' }),
+                'mr-2 text-sm',
               )}
-              to="/signup"
+              target='_blank'
+              to="https://www.facebook.com/thanglonguniversity"
             >
-              Sign up
+              Social network
+            </Link>
+            <Link
+              className={cn(
+                buttonVariants({ variant: 'link' }),
+                'mr-5 text-sm',
+              )}
+              to="/auth/login"
+            >
+              Pricing
+            </Link>
+            <Link
+              className={cn(
+                buttonVariants({ variant: 'default' }),
+                'text-sm',
+              )}
+              to="/auth/login"
+            >
+              Log in
             </Link>
           </div>
           <button

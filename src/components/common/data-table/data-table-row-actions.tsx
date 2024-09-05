@@ -7,9 +7,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Eye, Pencil, Trash2 } from 'lucide-react';
 
 
 interface DataTableRowActionsProps<TData> {
@@ -32,16 +32,12 @@ export function DataTableRowActions<TData>(props: DataTableRowActionsProps<TData
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+      <DropdownMenuContent align="center" className="w-[160px]">
+        <DropdownMenuItem className="cursor-pointer"><Eye className="h-4 mr-2 w-4" /> Xem</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer"><Pencil className="h-4 mr-2 w-4" /> Chỉnh sửa</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Delete
+        <DropdownMenuItem className="cursor-pointer">
+          <Trash2 className="h-4 mr-2 w-4" /> Xóa
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

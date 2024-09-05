@@ -9,6 +9,7 @@ import { useTheme } from '@/components/providers/theme-provider.tsx';
 
 export default function LandingPage() {
   const { theme } = useTheme();
+  const quantity=400
   return (<>
     <SiteHeader />
     <HeroSection />
@@ -18,7 +19,7 @@ export default function LandingPage() {
     <CallToActionSection />
     <Particles
       className="absolute inset-0 -z-10"
-      quantity={300}
+      quantity={quantity}
       ease={70}
       size={0.1}
       staticity={30}

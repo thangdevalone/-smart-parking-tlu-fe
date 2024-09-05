@@ -16,11 +16,11 @@ export default function HeroSection() {
       className="relative mx-auto mt-32 max-w-7xl px-6 text-center md:px-8"
     >
       <h1
-        className="animate-fade-in -translate-y-4 text-balance bg-gradient-to-br from-default-blue from-30% to-default-red bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] sm:text-6xl md:text-7xl lg:text-8xl dark:from-default-white/50 dark:to-default-red">
+        className="animate-fade-in -translate-y-4 text-balance bg-gradient-to-br from-default-blue from-30% to-default-red bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] sm:text-6xl md:text-7xl lg:text-8xl dark:from-default-white/70 dark:to-default-red">
         Thang Long University
         <br className="hidden md:block" />
         {' '}
-        Smart parking application
+        Smart parking web application
       </h1>
       <p
         className="animate-fade-in mb-12 -translate-y-4 text-balance text-lg tracking-tight text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl">
@@ -32,7 +32,7 @@ export default function HeroSection() {
       <Link
         to="/admin"
         className={cn("animate-fade-in -translate-y-4 gap-1 rounded-lg text-white opacity-0 ease-in-out [--animation-delay:600ms] dark:text-black",buttonVariants({variant: 'default'}))}>
-        <span>Get Started for free </span>
+        <span>Get Started</span>
         <ArrowRightIcon
           className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" />
       </Link>

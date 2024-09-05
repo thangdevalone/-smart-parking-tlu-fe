@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { RoleInApp } from '@/types';
 import { AdminPanelLayout, GuardLayout } from '@/components/layouts';
 
@@ -11,5 +11,7 @@ export default function RoleNavigate() {
   if ([RoleInApp.USER, RoleInApp.ADMIN].includes(role as RoleInApp)) {
     return <AdminPanelLayout />;
   }
+
+  return <Navigate to={'/not-found'} replace={true} />;
 
 }

@@ -10,6 +10,7 @@ import { Toaster } from 'sonner';
 import RoleNavigate from '@/components/protect-route/role-navigate.tsx';
 import LandingPage from '@/views/landing-page';
 import AuthProtect from '@/components/protect-route/auth-protect.tsx';
+import CardType from '@/views/manager-card/card-type';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ function App() {
               <Route path=":role" element={<RoleNavigate />}>
                 <Route index element={<Navigate to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="card-type" element={<CardType />} />
               </Route>
 
               <Route path="auth" element={<AuthLayout />}>
@@ -31,7 +33,7 @@ function App() {
                 <Route path="login" element={<LoginForm />} />
               </Route>
             </Route>
-
+            <Route path="not-found" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster closeButton richColors toastOptions={{
