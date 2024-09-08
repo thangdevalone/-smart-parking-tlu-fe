@@ -5,3 +5,9 @@ export const ConvertColumnIDs: { [key: string]: string } = {
   'createdAt': 'Tạo lúc',
   'updatedAt': 'Sửa lúc',
 };
+
+
+export const KeyDialogs = {
+  cardType: 'card-type',
+};
+export type IKeyDialog = typeof KeyDialogs[keyof typeof KeyDialogs];

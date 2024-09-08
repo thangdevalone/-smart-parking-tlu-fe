@@ -1,12 +1,12 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
-import { DataTableRowActions } from '@/components/common/data-table/data-table-row-actions.tsx';
 import { CardType } from '@/types/card.ts';
 import { ConvertColumnIDs } from '@/constants';
 import { format } from 'date-fns';
+import { CardTypeActions } from '@/views/manager-card/card-type/table/card-type-actions.tsx';
 
-export const cardTypeColumns: ColumnDef<CardType>[] = [
+const cardTypeColumns: ColumnDef<CardType>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -70,7 +70,8 @@ export const cardTypeColumns: ColumnDef<CardType>[] = [
   },
   {
     id: 'actions',
-
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    cell: ({ row }) => <CardTypeActions row={row} />,
+    enableHiding: false,
   },
 ];
+export default cardTypeColumns;

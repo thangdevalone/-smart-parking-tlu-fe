@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 interface AppState {
   collapseSidebar: boolean;
@@ -7,16 +7,22 @@ interface AppState {
 }
 
 const useAppStore = create<AppState>()(
-  persist(
-    (set) => ({
-      collapseSidebar: false,
-      toggleSidebar: () =>
-        set((state) => ({
-          collapseSidebar: !state.collapseSidebar,
-        })),
-    }),
+  devtools(
+    persist(
+      (set) => ({
+        collapseSidebar: false,
+        toggleSidebar: () =>
+          set((state) => ({
+            collapseSidebar: !state.collapseSidebar,
+          })),
+      }),
+      {
+        name: 'app-storage',
+      },
+    ),
     {
-      name: 'app-storage',
+      name: 'AppStore',
+      enabled: import.meta.env.VITE_ENVIRONMENT === 'development',
     },
   ),
 );

@@ -6,15 +6,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb.tsx';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { ContentLayout } from '@/components/layouts';
-import CardTypeTable from '@/views/manager-card/card-type/table/card-type-table.tsx';
 
-export default function CardTypePage() {
-
+export default function UserPage() {
   return (
-    <ContentLayout title="Loại thẻ">
+    <ContentLayout title="Hệ thống">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -24,13 +22,13 @@ export default function CardTypePage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Loại thẻ</BreadcrumbPage>
+            <BreadcrumbPage>Hệ thống</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <Card className="rounded-lg flex-1 flex border-none  min-h-0">
         <CardContent className="p-6 flex-1">
-          <CardTypeTable/>
+          <Outlet />
         </CardContent>
       </Card>
     </ContentLayout>

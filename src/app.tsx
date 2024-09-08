@@ -10,7 +10,12 @@ import { Toaster } from 'sonner';
 import RoleNavigate from '@/components/protect-route/role-navigate.tsx';
 import LandingPage from '@/views/landing-page';
 import AuthProtect from '@/components/protect-route/auth-protect.tsx';
-import CardType from '@/views/manager-card/card-type';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { AlertDialogProvider } from '@/components/providers/alert-dialog-provider.tsx';
+import UserPage from '@/views/manager-system/user';
+import CardTypePage from '@/views/manager-card/card-type';
+import UserForm from '@/views/manager-system/user/form/user-form-page.tsx';
+import { UserTable } from '@/views/manager-system/user/table/user-table.tsx';
 
 const queryClient = new QueryClient();
 
@@ -19,31 +24,38 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
         <TooltipProvider disableHoverableContent>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route element={<AuthProtect />}>
-              <Route path=":role" element={<RoleNavigate />}>
-                <Route index element={<Navigate to="dashboard" />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="card-type" element={<CardType />} />
-              </Route>
+          <AlertDialogProvider>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route element={<AuthProtect />}>
+                <Route path=":role" element={<RoleNavigate />}>
+                  <Route index element={<Navigate to="dashboard" />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="user" element={<UserPage />}>
+                    <Route index element={<UserTable />} />
+                    <Route path="form" element={<UserForm />} />
+                  </Route>
+                  <Route path="card-type" element={<CardTypePage />} />
+                </Route>
 
-              <Route path="auth" element={<AuthLayout />}>
-                <Route index element={<Navigate to="login" />} />
-                <Route path="login" element={<LoginForm />} />
+                <Route path="auth" element={<AuthLayout />}>
+                  <Route index element={<Navigate to="login" />} />
+                  <Route path="login" element={<LoginForm />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="not-found" element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Toaster closeButton richColors toastOptions={{
-            classNames: {
-              error: 'bg-red-400',
-              success: 'bg-green-400',
-              warning: 'bg-yellow-400',
-              info: 'bg-blue-400',
-            },
-          }} />
+              <Route path="not-found" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster closeButton richColors toastOptions={{
+              classNames: {
+                error: 'bg-red-400',
+                success: 'bg-green-400',
+                warning: 'bg-yellow-400',
+                info: 'bg-blue-400',
+              },
+            }} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </AlertDialogProvider>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

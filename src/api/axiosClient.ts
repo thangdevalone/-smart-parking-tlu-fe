@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { BACKEND_HOST } from '@/constants';
+import { SuccessResponse } from '@/types';
 
 const axiosClient = axios.create({
   baseURL: `${BACKEND_HOST}`,
@@ -17,15 +18,12 @@ axiosClient.interceptors.request.use(
 );
 
 axiosClient.interceptors.response.use(
-  function(response: { data: any }) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response.data;
+  <T>(response: AxiosResponse<{ data: SuccessResponse<T> }>) => {
+    return response;
   },
-  function(error: { response: { data: any } }) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error.response.data);
+  (error: AxiosError<{ data: any }>) => {
+    // Handle the error response
+    return Promise.reject(error.response?.data);
   },
 );
 

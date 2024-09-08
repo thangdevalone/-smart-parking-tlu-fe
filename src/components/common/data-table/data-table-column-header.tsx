@@ -26,7 +26,7 @@ export function DataTableColumnHeader<TData, TValue>(props: DataTableColumnHeade
     className,
   } = props;
   if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>;
+    return <div className={cn('text-xs',className)}>{title}</div>;
   }
 
   return (

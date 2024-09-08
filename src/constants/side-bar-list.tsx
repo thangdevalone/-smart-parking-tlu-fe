@@ -21,6 +21,7 @@ type Group = {
 };
 
 export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp.GUARD>): Group[] {
+  console.log(pathname);
   return [
     {
       groupLabel: '',
@@ -39,19 +40,14 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
       menus: [
         {
           href: '',
-          label: 'Người dùng',
-          active: pathname.includes('/students') || pathname.includes('/guards') || pathname.includes('/roles'),
+          label: 'Hệ thống',
+          active: pathname.includes('/user') || pathname.includes('/roles'),
           icon: Users,
           submenus: [
             {
-              href: `/${role}/students`,
-              label: 'Sinh viên',
-              active: pathname === `/${role}/students`,
-            },
-            {
-              href: `/${role}/guards`,
-              label: 'Bảo vệ',
-              active: pathname === `/${role}/guards`,
+              href: `/${role}/user`,
+              label: 'Người dùng',
+              active: pathname.includes(`/${role}/user`),
             },
             {
               href: `/${role}/roles`,
@@ -63,7 +59,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
         {
           href: ``,
           label: 'Thẻ gửi xe',
-          active: pathname.includes('/card-type') || pathname.includes('/guards'),
+          active: pathname.includes('/card-type') || pathname.includes('/card'),
           icon: IdCard,
           submenus: [
             {
