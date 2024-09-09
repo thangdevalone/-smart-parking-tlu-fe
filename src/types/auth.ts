@@ -1,5 +1,7 @@
+import { Role } from "./role";
+
 export interface LoginForm {
-  email: string;
+  userCode: string;
   password: string;
 }
 
@@ -20,13 +22,7 @@ export interface User {
   role: Role;
 }
 
-export interface Role {
-  id: number;
-  name: string;
-  description: any;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 export enum RoleInApp {
   ADMIN = 'admin',

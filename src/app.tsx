@@ -16,6 +16,9 @@ import UserPage from '@/views/manager-system/user';
 import CardTypePage from '@/views/manager-card/card-type';
 import UserForm from '@/views/manager-system/user/form/user-form-page.tsx';
 import { UserTable } from '@/views/manager-system/user/table/user-table.tsx';
+import RolePage from './views/manager-system/role';
+import { RoleTable } from './views/manager-system/role/table/role-table';
+import RoleFormPage from './views/manager-system/role/form/role-form-page';
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,10 @@ function App() {
                   <Route path="user" element={<UserPage />}>
                     <Route index element={<UserTable />} />
                     <Route path="form" element={<UserForm />} />
+                  </Route>
+                  <Route path="roles" element={<RolePage />}>
+                    <Route index element={<RoleTable />} />
+                    <Route path="form" element={<RoleFormPage />} />
                   </Route>
                   <Route path="card-type" element={<CardTypePage />} />
                 </Route>

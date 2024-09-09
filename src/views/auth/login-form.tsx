@@ -9,8 +9,8 @@ import useAuthStore from '@/store/auth-store.ts';
 
 
 const loginSchema = z.object({
-  email: z.string().min(1, {
-    message: 'Email must be at least 1 characters.',
+  userCode: z.string().min(1, {
+    message: 'userCode must be at least 1 characters.',
   }),
   password: z.string().min(6, {
     message: 'Password must be at least 6 characters.',
@@ -24,7 +24,7 @@ export const LoginForm = () => {
   const form = useForm<loginValue>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
+      userCode: '',
       password: '',
     },
   });
@@ -37,7 +37,7 @@ export const LoginForm = () => {
     <Form {...form}>
       <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
         <TextField
-          name="email"
+          name="userCode"
           label="Tên đăng nhập"
           placeholder="Nhập tên đăng nhập"
           require

@@ -9,5 +9,6 @@ export const ConvertColumnIDs: { [key: string]: string } = {
 
 export const KeyDialogs = {
   cardType: 'card-type',
+  role: 'role'
 };
 export type IKeyDialog = typeof KeyDialogs[keyof typeof KeyDialogs];
