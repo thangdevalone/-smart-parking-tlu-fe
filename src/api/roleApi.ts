@@ -1,8 +1,15 @@
 import axiosClient from '@/api/axiosClient.ts';
 import { ParsedQuery } from 'query-string';
 import { Role, SuccessResponse, UpdateRole } from '@/types';
+import { DataCombobox } from '@/components/common/form-controls/combobox-field.tsx';
 
 export const roleApi = {
+
+  async getAllRole() {
+    const url = `/roles/getAll`;
+    return await axiosClient.get<SuccessResponse<DataCombobox[]>>(url);
+  },
+
   async getRoles(params?: ParsedQuery) {
     const url = `/roles`;
     return await axiosClient.get<SuccessResponse<Role[]>>(url, { params });

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { roleApi } from '@/api/role';
+import { roleApi } from '@/api/roleApi.ts';
 
 interface IRoleDelete {
   handleSuccess?: () => void,
