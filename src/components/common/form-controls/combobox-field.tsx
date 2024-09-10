@@ -57,26 +57,24 @@ export const ComboboxField = (props: ComboboxFieldProps) => {
             <Popover open={open} onOpenChange={setOpen}>
               <PopoverTrigger asChild>
                 <FormControl>
-                  <div>
-                    <Button
-                      variant="outline"
-                      disabled={disabled}
-                      type="button"
-                      aria-expanded={open}
-                      role="combobox"
-                      className={cn(
-                        'w-full capitalize justify-between',
-                        !field.value && 'text-muted-foreground',
-                      )}
-                    >
-                      {field.value
-                        ? data.find(
-                          (item) => String(item.id) === field.value,
-                        )?.value
-                        : placeholder}
-                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                    </Button>
-                  </div>
+                  <Button
+                    variant="outline"
+                    disabled={disabled}
+                    type="button"
+                    aria-expanded={open}
+                    role="combobox"
+                    className={cn(
+                      'w-full  capitalize justify-between',
+                      !field.value && 'text-muted-foreground',
+                    )}
+                  >
+                    {field.value
+                      ? data.find(
+                        (item) => String(item.id) === field.value,
+                      )?.value
+                      : placeholder}
+                    <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
                 </FormControl>
               </PopoverTrigger>
               <PopoverContent align="center" className="popover-content-width-full p-0">

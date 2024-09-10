@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from './role';
 
 export interface LoginForm {
   userCode: string;
@@ -12,16 +12,15 @@ export interface Tokens {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   fullName: string;
-  phone: any;
+  phone?: string;
   email: string;
   userCode: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   role: Role;
 }
-
 
 
 export enum RoleInApp {
