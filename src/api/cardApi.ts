@@ -1,7 +1,7 @@
 import axiosClient from '@/api/axiosClient.ts';
 import { ParsedQuery } from 'query-string';
 import { CardType, SuccessResponse } from '@/types';
-import { CardTypeValue } from '@/views/manager-card/card-type/form/card-type-form.tsx';
+import { CardTypeValue } from '@/views/manager-card/card-type/form-ui/card-type-form.tsx';
 
 export const cardApi = {
   async getCardTypes(params?: ParsedQuery) {

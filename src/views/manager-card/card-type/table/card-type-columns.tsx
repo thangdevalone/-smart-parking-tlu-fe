@@ -4,7 +4,7 @@ import { DataTableColumnHeader } from '@/components/common/data-table/data-table
 import { CardType } from '@/types/card.ts';
 import { ConvertColumnIDs } from '@/constants';
 import { format } from 'date-fns';
-import { CardTypeActions } from '@/views/manager-card/card-type/table/card-type-actions.tsx';
+import { CardTypeHandler } from '@/views/manager-card/card-type/table/card-type-handler.tsx';
 
 const cardTypeColumns: ColumnDef<CardType>[] = [
   {
@@ -70,7 +70,7 @@ const cardTypeColumns: ColumnDef<CardType>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <CardTypeActions row={row} />,
+    cell: ({ row }) => <CardTypeHandler row={row} />,
     enableHiding: false,
   },
 ];

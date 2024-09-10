@@ -10,10 +10,10 @@ import useAuthStore from '@/store/auth-store.ts';
 
 const loginSchema = z.object({
   userCode: z.string().min(1, {
-    message: 'userCode must be at least 1 characters.',
+    message: 'Cần nhập mã người dùng',
   }),
   password: z.string().min(6, {
-    message: 'Password must be at least 6 characters.',
+    message: 'Mật khẩu tối thiểu 6 kí tự',
   }),
 });
 type loginValue = z.infer<typeof loginSchema>;
@@ -38,8 +38,8 @@ export const LoginForm = () => {
       <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
         <TextField
           name="userCode"
-          label="Tên đăng nhập"
-          placeholder="Nhập tên đăng nhập"
+          label="Mã người dùng"
+          placeholder="Nhập mã người dùng"
           require
         />
         <PasswordField
