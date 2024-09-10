@@ -24,7 +24,7 @@ export function UserToolbar<TData>(props: DataTableToolbarProps<TData>) {
         </Button>
         <div>
           <Input
-            placeholder="Tìm tên loại thẻ"
+            placeholder="Tìm tên người dùng"
             startIcon={<SearchIcon className="w-4 h-4" />}
             value={query}
             onChange={(event) => setQuery(event.target.value)}

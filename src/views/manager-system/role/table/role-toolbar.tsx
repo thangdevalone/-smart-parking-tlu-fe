@@ -11,15 +11,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useDialogStore } from '@/store/dialog-state-store.ts';
+import { useDialogStore } from '@/store/dialog-state-store';
 import { KeyDialogs } from '@/constants';
-import { cn } from '@/lib/utils.ts';
+import RoleForm from '../form/role-form-page';
 import { motion } from 'framer-motion';
-import { useCardTypeDelete } from '@/hooks';
-import { useAlertDialog } from '@/components/providers/alert-dialog-provider.tsx';
+import { useAlertDialog } from '@/components/providers/alert-dialog-provider';
+import { useRoleDelete } from '@/hooks/mutation/use-role-delete';
+import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
-import { CardTypeForm } from '@/views/manager-card/card-type/form/card-type-form.tsx';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -27,11 +27,13 @@ interface DataTableToolbarProps<TData> {
   setQuery: (query: string) => void;
 }
 
-export default function CardTypeToolbar<TData>({ table, query, setQuery }: DataTableToolbarProps<TData>) {
-  const { dialogs, setDialogState } = useDialogStore();
+
+export function RoleToolbar<TData>(props: DataTableToolbarProps<TData>) {
+  const { table, query, setQuery } = props;
   const rowsSelected = table.getSelectedRowModel().rows;
-  const mutation = useCardTypeDelete();
+  const { dialogs, setDialogState } = useDialogStore();
   const { showAlert } = useAlertDialog();
+  const mutation = useRoleDelete();
   const handleDelete = async () => {
     await showAlert({
       header: `Xác nhận xóa ${rowsSelected.length} hàng`,
@@ -44,8 +46,8 @@ export default function CardTypeToolbar<TData>({ table, query, setQuery }: DataT
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Dialog
-          onOpenChange={(open) => setDialogState(KeyDialogs.cardType, { open })}
-          open={dialogs[KeyDialogs.cardType]?.open}
+          onOpenChange={(open) => setDialogState(KeyDialogs.role, { open })}
+          open={dialogs[KeyDialogs.role]?.open}
         >
           <DialogTrigger asChild>
             <Button icon={<Plus className="w-4 h-4 mr-2" />}>
@@ -54,16 +56,16 @@ export default function CardTypeToolbar<TData>({ table, query, setQuery }: DataT
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Thêm mới loại thẻ</DialogTitle>
-              <DialogDescription>Điền giá trị vào mẫu để tạo loại thẻ.</DialogDescription>
+              <DialogTitle>Thêm mới vai trò</DialogTitle>
+              <DialogDescription>Điền giá trị vào mẫu để tạo vai trò.</DialogDescription>
             </DialogHeader>
-            <CardTypeForm />
+            <RoleForm />
           </DialogContent>
         </Dialog>
 
         <div>
           <Input
-            placeholder="Tìm tên loại thẻ"
+            placeholder="Tìm tên vai trò"
             startIcon={<SearchIcon className="w-4 h-4" />}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -99,8 +101,8 @@ export default function CardTypeToolbar<TData>({ table, query, setQuery }: DataT
             </Badge>
           </motion.div>
         )}
-      </div>
 
+      </div>
       <DataTableViewOptions table={table} />
     </div>
   );

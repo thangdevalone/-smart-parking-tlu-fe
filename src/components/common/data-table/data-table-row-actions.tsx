@@ -1,7 +1,4 @@
-import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { Row } from '@tanstack/react-table';
-
-import { Button } from '@/components/ui/button';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,15 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 
-
-interface DataTableRowActionsProps<TData> {
-  row: Row<TData>;
-}
-
-export function DataTableRowActions<TData>(props: DataTableRowActionsProps<TData>) {
-  const {
-    row,
-  } = props;
+export function DataTableRowActions() {
 
   return (
     <DropdownMenu>
