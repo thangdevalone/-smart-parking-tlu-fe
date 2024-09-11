@@ -18,7 +18,6 @@ import { DataTablePagination } from '@/components/common/data-table/data-table-p
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString, { ParsedQuery } from 'query-string';
 import { useDebounce, useHistoryFetcher } from '@/hooks';
-import { useUserFetcher } from '@/hooks/data-fetcher/use-user.ts';
 import { TableHeaderComp } from '@/components/common/data-table';
 import { LoaderCircle } from 'lucide-react';
 import { userColumns } from '@/views/manager-system/user/table/user-columns.tsx';
@@ -88,7 +87,7 @@ export function HistoryTable() {
 
   return (
     <div className="gap-4 h-full flex flex-col">
-      {/* <HistoryToolbar table={table} query={query} setQuery={setQuery} /> */}
+      <HistoryToolbar table={table} query={query} setQuery={setQuery} />
       <div className="rounded-md flex relative  flex-col border min-h-0 flex-1">
         <Table>
           <TableHeaderComp className="sticky top-0 z-[20] bg-background" table={table} />
