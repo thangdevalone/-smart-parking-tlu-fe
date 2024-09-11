@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { Role, type SuccessResponse } from '@/types';
 import { ParsedQuery } from 'query-string';
-import { roleApi } from '@/api/role';
+import { roleApi } from '@/api/roleApi';
 
 type UseRoleOptions<T> = Omit<UseQueryOptions<SuccessResponse<T>>, 'queryFn' | 'queryKey'>
 

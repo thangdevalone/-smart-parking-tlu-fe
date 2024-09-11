@@ -9,6 +9,7 @@ export const ConvertColumnIDs: { [key: string]: string } = {
 
 export const KeyDialogs = {
   cardType: 'card-type',
-  role: 'role'
+  role: 'role',
+  resetPassowrdUser: "reset-password-user",
 };
 export type IKeyDialog = typeof KeyDialogs[keyof typeof KeyDialogs];

@@ -6,9 +6,10 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
   } from '@/components/ui/breadcrumb.tsx';
-  import { Link, Outlet } from 'react-router-dom';
+  import { Link } from 'react-router-dom';
   import { Card, CardContent } from '@/components/ui/card.tsx';
   import { ContentLayout } from '@/components/layouts';
+import { RoleTable } from './table/role-table';
   
   export default function RolePage() {
     return (
@@ -28,7 +29,7 @@ import {
         </Breadcrumb>
         <Card className="rounded-lg flex-1 flex border-none  min-h-0">
           <CardContent className="p-6 flex-1">
-            <Outlet />
+            <RoleTable />
           </CardContent>
         </Card>
       </ContentLayout>

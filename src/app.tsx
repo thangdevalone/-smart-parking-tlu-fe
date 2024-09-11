@@ -17,8 +17,12 @@ import CardTypePage from '@/views/manager-card/card-type';
 import UserForm from '@/views/manager-system/user/form/user-form-page.tsx';
 import { UserTable } from '@/views/manager-system/user/table/user-table.tsx';
 import RolePage from './views/manager-system/role';
-import { RoleTable } from './views/manager-system/role/table/role-table';
-import RoleFormPage from './views/manager-system/role/form/role-form-page';
+import HistoryPage from './views/manager-history';
+import SettingsPage from './views/settings';
+import { ManagerProfile } from './views/settings/manager-profile';
+import { ManagerPassword } from './views/settings/manager-password';
+import { ManagerPersonalisation } from './views/settings/manager-personalisation';
+import BillPage from './views/manager-bill';
 
 const queryClient = new QueryClient();
 
@@ -38,13 +42,16 @@ function App() {
                     <Route index element={<UserTable />} />
                     <Route path="form" element={<UserForm />} />
                   </Route>
-                  <Route path="roles" element={<RolePage />}>
-                    <Route index element={<RoleTable />} />
-                    <Route path="form" element={<RoleFormPage />} />
-                  </Route>
+                  <Route path="roles" element={<RolePage />} />
                   <Route path="card-type" element={<CardTypePage />} />
+                  <Route path="history" element={<HistoryPage />} />
+                  <Route path="payment/bills" element={<BillPage />} />
+                  <Route path='settings' element={<SettingsPage />}>
+                    <Route path="profile" element={<ManagerProfile />} />
+                    <Route path="password" element={<ManagerPassword />} />
+                    <Route path="personalisation" element={<ManagerPersonalisation />} />
+                  </Route>
                 </Route>
-
                 <Route path="auth" element={<AuthLayout />}>
                   <Route index element={<Navigate to="login" />} />
                   <Route path="login" element={<LoginForm />} />

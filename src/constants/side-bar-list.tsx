@@ -82,9 +82,9 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           submenus: [],
         },
         {
-          href: `/${role}/categories`,
+          href: `/${role}/history`,
           label: 'Danh mục hình ảnh',
-          active: pathname.includes('/categories'),
+          active: pathname.includes('/history'),
           icon: Bookmark,
           submenus: [],
         },
@@ -116,7 +116,22 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Cài đặt',
           active: pathname.includes(`/${role}/settings`),
           icon: Settings,
-          submenus: [],
+          submenus: [
+            {
+              href: `/${role}/settings/profile`,
+              label: 'Thông tin cá nhân',
+              active: pathname === `/${role}/settings/profile`,
+            },
+            {
+              href: `/${role}/settings/password`,
+              label: 'Quản lý mật khẩu',
+              active: pathname === `/${role}/settings/password`,
+            },{
+              href: `/${role}/settings/personalisation`,
+              label: 'Cá nhân hoá',
+              active: pathname === `/${role}/settings/personalisation`,
+            },
+          ],
         },
       ],
     },
