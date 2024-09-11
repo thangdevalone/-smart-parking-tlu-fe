@@ -25,7 +25,7 @@ interface UserRowActionsProps {
   row: Row<User>;
 }
 
-export function UserActions(props: UserRowActionsProps) {
+export function UserHandler(props: UserRowActionsProps) {
   const {
     row,
   } = props;

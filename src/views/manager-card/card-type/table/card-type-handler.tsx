@@ -21,7 +21,7 @@ interface CardTypeRowActionsProps {
   row: Row<CardType>;
 }
 
-export function CardTypeActions(props: CardTypeRowActionsProps) {
+export function CardTypeHandler(props: CardTypeRowActionsProps) {
   const {
     row,
   } = props;

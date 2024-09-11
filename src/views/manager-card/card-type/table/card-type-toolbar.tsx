@@ -19,7 +19,7 @@ import { useCardTypeDelete } from '@/hooks';
 import { useAlertDialog } from '@/components/providers/alert-dialog-provider.tsx';
 import { Separator } from '@/components/ui/separator.tsx';
 import { Badge } from '@/components/ui/badge.tsx';
-import { CardTypeForm } from '@/views/manager-card/card-type/form/card-type-form.tsx';
+import { CardTypeForm } from '@/views/manager-card/card-type/form-ui/card-type-form.tsx';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

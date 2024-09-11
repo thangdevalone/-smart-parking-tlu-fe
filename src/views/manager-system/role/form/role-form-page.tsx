@@ -6,7 +6,8 @@ import { Form } from '@/components/ui/form.tsx';
 import { TextField } from '@/components/common/form-controls';
 import { toast } from 'sonner';
 import { DialogActionType } from '@/types/app.ts';
-import { roleApi } from '@/api/roleApi';
+import { roleApi } from '@/api/roleApi.ts';
+
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { KeyDialogs } from '@/constants';

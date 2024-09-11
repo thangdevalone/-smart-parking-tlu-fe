@@ -2,7 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { User } from '@/types';
-import { UserActions } from '@/views/manager-system/user/table/user-actions.tsx';
+import { UserHandler } from '@/views/manager-system/user/table/user-handler.tsx';
 
 export const userColumns: ColumnDef<User>[] = [
   {
@@ -75,6 +75,6 @@ export const userColumns: ColumnDef<User>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => (<UserActions row={row} />),
+    cell: ({ row }) => (<UserHandler row={row} />),
   },
 ];

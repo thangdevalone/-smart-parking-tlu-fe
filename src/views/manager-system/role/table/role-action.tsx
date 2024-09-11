@@ -12,7 +12,7 @@ import { DialogActionType, Role } from '@/types';
 import { KeyDialogs } from '@/constants';
 import { useDialogStore } from '@/store/dialog-state-store.ts';
 import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu';
-import { roleApi } from '@/api/roleApi';
+import { roleApi } from '@/api/roleApi.ts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useAlertDialog } from '@/components/providers/alert-dialog-provider';
@@ -51,7 +51,7 @@ export function RoleActions(props: UserRowActionsProps) {
       },
     });
   }
-  
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

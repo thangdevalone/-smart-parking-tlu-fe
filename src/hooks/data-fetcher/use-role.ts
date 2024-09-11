@@ -1,7 +1,9 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { Role, type SuccessResponse } from '@/types';
 import { ParsedQuery } from 'query-string';
-import { roleApi } from '@/api/roleApi';
+import { roleApi } from '@/api/roleApi.ts';
+import { DataCombobox } from '@/components/common/form-controls/combobox-field.tsx';
+
 
 type UseRoleOptions<T> = Omit<UseQueryOptions<SuccessResponse<T>>, 'queryFn' | 'queryKey'>
 
@@ -23,20 +25,19 @@ export const useRoleFetcher = (props: IUseRole) => {
 };
 
 
-interface ISpecificRoleFetcher {
-  options?: UseRoleOptions<Role>,
-  id?: string;
+interface IUseAllRole {
+  options?: UseRoleOptions<DataCombobox[]>,
 }
 
-
-export const useSpecificRoleFetcher = (props: ISpecificRoleFetcher) => {
-  const { options, id } = props;
+export const useAllRoleFetcher = (props: IUseAllRole) => {
+  const { options } = props;
   return useQuery({
     ...options,
-    queryKey: ['user', { id }],
+    queryKey: ['role-all'],
     queryFn: async () => {
-      const { data } = await roleApi.getSpecificRole(id);
+      const { data } = await roleApi.getAllRole();
       return data;
     },
   });
 };
+
