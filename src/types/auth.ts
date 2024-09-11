@@ -22,6 +22,11 @@ export interface User {
   role: Role;
 }
 
+export interface ChangePasswordForm {
+  password: string;
+  passwordNew: string;
+  passwordConfirm: string;
+}
 
 
 export enum RoleInApp {

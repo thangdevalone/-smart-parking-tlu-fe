@@ -4,6 +4,7 @@ import { ParsedQuery } from 'query-string';
 import { roleApi } from '@/api/roleApi.ts';
 import { DataCombobox } from '@/components/common/form-controls/combobox-field.tsx';
 
+
 type UseRoleOptions<T> = Omit<UseQueryOptions<SuccessResponse<T>>, 'queryFn' | 'queryKey'>
 
 interface IUseRole {

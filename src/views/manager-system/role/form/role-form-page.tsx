@@ -7,6 +7,7 @@ import { TextField } from '@/components/common/form-controls';
 import { toast } from 'sonner';
 import { DialogActionType } from '@/types/app.ts';
 import { roleApi } from '@/api/roleApi.ts';
+
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { KeyDialogs } from '@/constants';
@@ -70,25 +71,25 @@ export default function RoleForm() {
     });
   };
 
-    return (
-      <Form {...form}>
-        <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
-          <TextField
-            name="name"
-            label="Tên vai trò"
-            placeholder="Nhập tên vai trò.."
-            require
-          />
-          <TextField
-            name="description"
-            label="Nhập miêu tả"
-            placeholder="Nhập miêu tả.."
-          />
-           <DialogFooter>
+  return (
+    <Form {...form}>
+      <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>
+        <TextField
+          name="name"
+          label="Tên vai trò"
+          placeholder="Nhập tên vai trò.."
+          require
+        />
+        <TextField
+          name="description"
+          label="Nhập miêu tả"
+          placeholder="Nhập miêu tả.."
+        />
+        <DialogFooter>
           <DialogClose className={cn(buttonVariants({ variant: 'outline' }))}>Cancel</DialogClose>
           <Button loading={mutation.isPending} type="submit">Submit</Button>
         </DialogFooter>
-        </form>
-      </Form>
-    );
+      </form>
+    </Form>
+  );
 }
