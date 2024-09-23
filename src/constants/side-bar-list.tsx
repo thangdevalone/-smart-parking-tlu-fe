@@ -63,9 +63,9 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           icon: IdCard,
           submenus: [
             {
-              href: `/${role}/card`,
+              href: `/${role}/cards`,
               label: 'Thẻ cứng',
-              active: pathname === `/${role}/card`,
+              active: pathname === `/${role}/cards`,
             },
             {
               href: `/${role}/card-type`,

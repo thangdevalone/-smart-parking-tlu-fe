@@ -21,3 +21,21 @@ export const useCardTypeFetcher = (props: IUseCardType) => {
     },
   });
 };
+
+type UseTypeOptions = Omit<UseQueryOptions<SuccessResponse<Card[]>>, 'queryFn' | 'queryKey'>
+interface IUseCard {
+  options?: UseTypeOptions,
+  queryParam: ParsedQuery;
+}
+
+export const useCardFetcher = (props: IUseCard) => {
+  const { options, queryParam } = props;
+  return useQuery({
+    ...options,
+    queryKey: ['card', queryParam],
+    queryFn: async () => {
+      const { data } = await cardApi.getCards(queryParam);
+      return data;
+    },
+  });
+}

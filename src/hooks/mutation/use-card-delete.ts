@@ -30,3 +30,33 @@ export const useCardTypeDelete = (props?: ICardTypeDelete) => {
     },
   });
 };
+
+
+interface ICardDelete {
+  handleSuccess?: () => void,
+  handleError?: () => void;
+}
+
+export const useCardDelete = (props?: ICardDelete) => {
+  const handleSuccess = props?.handleSuccess;
+  const handleError = props?.handleError;
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: cardApi.deleteCard,
+    onSuccess: ({ data }) => {
+      queryClient.invalidateQueries({ queryKey: ['card'] }).then(() => {
+        toast.success(data.message);
+        if (handleSuccess) {
+          handleSuccess();
+        }
+      });
+    },
+    onError: (error: any) => {
+      toast.error(error.message || 'Something went wrong');
+      if (handleError) {
+        handleError();
+      }
+    },
+  });
+};
