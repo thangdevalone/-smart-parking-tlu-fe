@@ -1,5 +1,4 @@
 import { User } from '@/types/auth.ts';
-import { Bill } from '@/types/bill.ts';
 
 export interface Card {
   id: number;
@@ -8,7 +7,6 @@ export interface Card {
   cardStatus: CardStatus;
   user: User;
   cardType: CardType;
-  bills: Bill[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,3 +24,4 @@ export enum CardStatus {
   ACTIVE = 'active',
   INACTIVE = 'inactive',
 }
+

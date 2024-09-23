@@ -12,20 +12,16 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
-
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table.tsx';
-import { DataTablePagination } from '@/components/common/data-table/data-table-pagination.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useCardFetcher, useDebounce } from '@/hooks';
 import queryString, { ParsedQuery } from 'query-string';
-import { useDebounce } from '@/hooks';
-import { TableHeaderComp } from '@/components/common/data-table';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table.tsx';
+import { DataTablePagination, TableHeaderComp } from '@/components/common/data-table';
 import { LoaderCircle } from 'lucide-react';
-import { userColumns } from '@/views/manager-system/user/table/user-columns.tsx';
-import { useRoleFetcher } from '@/hooks/data-fetcher/use-role';
-import { roleColumns } from './role-columns';
-import { RoleToolbar } from './role-toolbar';
+import CardToolbar from './card-toolbar';
+import cardColumns from './card-columns';
 
-export function RoleTable() {
+export default function CardTable() {
   const location = useLocation();
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -50,7 +46,7 @@ export function RoleTable() {
     sortType: !sorting[0]?.desc ? 'asc' : 'desc',
     filters: String(columnFilters),
   };
-  const { data, isFetching } = useRoleFetcher({
+  const { data, isFetching } = useCardFetcher({
     options: { refetchOnWindowFocus: false, enabled: !!location.search, retry: false },
     queryParam: param,
   });
@@ -59,7 +55,7 @@ export function RoleTable() {
   }, [debouncedSearchTerm, sorting, columnFilters, pagination.pageIndex, pagination.pageSize]);
   const table = useReactTable({
     data: data ? data?.data : [],
-    columns: roleColumns,
+    columns: cardColumns,
     state: {
       sorting,
       columnVisibility,
@@ -84,12 +80,11 @@ export function RoleTable() {
     getSortedRowModel: getSortedRowModel(),
   });
 
-
   return (
     <div className="gap-4 h-full flex flex-col">
-      <RoleToolbar table={table} query={query} setQuery={setQuery} />
-      <div className="rounded-md flex relative  flex-col border min-h-0 flex-1">
-        <Table>
+      <CardToolbar table={table} query={query} setQuery={setQuery} />
+      <div className="rounded-md flex relative flex-col border min-h-0 flex-1">
+        <Table className="">
           <TableHeaderComp className="sticky top-0 z-[20] bg-background" table={table} />
           {!isFetching && <TableBody>
             {table.getRowModel().rows?.length ? (
@@ -111,7 +106,7 @@ export function RoleTable() {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={userColumns.length}
+                  colSpan={cardColumns.length}
                   className="h-24 text-center"
                 >
                   No results.
