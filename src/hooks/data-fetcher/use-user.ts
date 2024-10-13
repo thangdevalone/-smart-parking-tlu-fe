@@ -24,7 +24,7 @@ export const useUserFetcher = (props: IUseUser) => {
 
 interface ISpecificUserFetcher {
   options?: UseUserOptions<User>,
-  id?: string;
+  id?: number;
 }
 
 export const useSpecificUserFetcher = (props: ISpecificUserFetcher) => {

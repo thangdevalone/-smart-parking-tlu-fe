@@ -1,7 +1,7 @@
 import { ChevronDown, Dot, LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   DropdownMenu,
@@ -31,12 +31,12 @@ interface CollapseMenuButtonProps {
 }
 
 export function CollapseMenuButton({
-  icon: Icon,
-  label,
-  active,
-  submenus,
-  isOpen,
-}: CollapseMenuButtonProps) {
+                                     icon: Icon,
+                                     label,
+                                     active,
+                                     submenus,
+                                     isOpen,
+                                   }: CollapseMenuButtonProps) {
   const isSubmenuActive = submenus.some((submenu) => submenu.active);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(isSubmenuActive);
 
@@ -52,7 +52,7 @@ export function CollapseMenuButton({
               <p
                 className={cn(
                   'max-w-[150px] truncate',
-                  isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0'
+                  isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0',
                 )}
               >
                 {label}
@@ -61,7 +61,7 @@ export function CollapseMenuButton({
             <div
               className={cn(
                 'whitespace-nowrap',
-                isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0'
+                isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0',
               )}
             >
               <ChevronDown size={18} className="transition-transform duration-200" />
@@ -69,27 +69,24 @@ export function CollapseMenuButton({
           </div>
         </Button>
       </CollapsibleTrigger>
-      <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+      <CollapsibleContent
+        className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
         {submenus.map(({ href, label, active }, index) => (
-          <Button
-            key={index}
-            variant={active ? 'secondary' : 'ghost'}
-            className="w-full justify-start h-10 mb-1"
-          >
-            <Link className='w-full  flex flex-row gap-2' to={href}>
+          <Link key={index}
+                className={cn('w-full flex flex-row gap-2 !justify-start h-10 mb-1', active ? buttonVariants({ variant: 'secondary' }) : buttonVariants({ variant: 'ghost' }))}
+                to={href}>
               <span className="mr-4 ml-2">
                 <Dot size={18} />
               </span>
-              <p
-                className={cn(
-                  'max-w-[170px] truncate',
-                  isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0'
-                )}
-              >
-                {label}
-              </p>
-            </Link>
-          </Button>
+            <p
+              className={cn(
+                'max-w-[170px] truncate',
+                isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0',
+              )}
+            >
+              {label}
+            </p>
+          </Link>
         ))}
       </CollapsibleContent>
     </Collapsible>
@@ -110,7 +107,7 @@ export function CollapseMenuButton({
                   <p
                     className={cn(
                       'max-w-[200px] truncate',
-                      isOpen === false ? 'opacity-0' : 'opacity-100'
+                      isOpen === false ? 'opacity-0' : 'opacity-100',
                     )}
                   >
                     {label}

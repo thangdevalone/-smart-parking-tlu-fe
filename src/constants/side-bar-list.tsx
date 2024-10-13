@@ -21,7 +21,6 @@ type Group = {
 };
 
 export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp.GUARD>): Group[] {
-  console.log(pathname);
   return [
     {
       groupLabel: '',

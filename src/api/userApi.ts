@@ -8,16 +8,16 @@ export const userApi = {
     const url = `/users`;
     return await axiosClient.get<SuccessResponse<User[]>>(url, { params });
   },
-  async getSpecificUser(id?: string) {
+  async getSpecificUser(id?: number) {
     const url = `/users/${id || ''}`;
     return await axiosClient.get<SuccessResponse<User>>(url);
   },
   async addUser(data: UserValue) {
-    const url = `/card-type`;
+    const url = `/users`;
     return await axiosClient.post<SuccessResponse<User>>(url, data);
   },
-  async updateUser(id: number, data: UserValue) {
-    const url = `/card-type/${id}`;
+  async updateUser(id: number, data: any) {
+    const url = `/users/${id}`;
     return await axiosClient.patch<SuccessResponse<User>>(url, data);
   },
 };

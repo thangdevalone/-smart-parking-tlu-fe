@@ -48,7 +48,8 @@ function App() {
                   <Route path="cards" element={<CardPage />} />
                   <Route path="history" element={<HistoryPage />} />
                   <Route path="payment/bills" element={<BillPage />} />
-                  <Route path='settings' element={<SettingsPage />}>
+                  <Route path="settings" element={<SettingsPage />}>
+                    <Route index element={<Navigate to={'profile'} />} />
                     <Route path="profile" element={<ManagerProfile />} />
                     <Route path="password" element={<ManagerPassword />} />
                     <Route path="personalisation" element={<ManagerPersonalisation />} />

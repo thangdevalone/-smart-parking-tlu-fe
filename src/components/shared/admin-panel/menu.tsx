@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { Ellipsis, LogOut } from 'lucide-react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { SideBarList } from '../../../constants';
+import { SideBarList } from '@/constants';
 import { Button, buttonVariants } from '../../ui/button';
 import { ScrollArea } from '../../ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../../ui/tooltip';
@@ -100,7 +100,7 @@ export function Menu({ isOpen }: MenuProps) {
                       isOpen === false ? 'opacity-0 hidden' : 'opacity-100',
                     )}
                   >
-                    Sign out
+                    Đăng xuất
                   </p>
                 </Button>
               </TooltipTrigger>

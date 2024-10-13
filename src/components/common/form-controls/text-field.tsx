@@ -60,13 +60,14 @@ export const TextField = (props: TextFieldProps) => {
           </FormLabel>
           <FormControl>
             <Input
+              {...field}
               endIcon={endIcon}
               startIcon={startIcon}
               type={type}
               placeholder={placeholder}
               autoComplete={autoComplete}
               disabled={disabled}
-              value={currencyVnd ? CurrencyFormatter.format(field.value.toString()  ) : field.value}
+              value={(currencyVnd ? CurrencyFormatter.format(field.value.toString()) : field.value) ?? ''}
               onChange={(e) => handleChange(e, field.onChange)}
             />
           </FormControl>

@@ -13,7 +13,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative flex items-center w-full">
         {startIcon &&
-          <span className={cn({ 'opacity-50': props.disabled }, 'absolute left-2.5 opacity-80 text-sm')}>{startIcon}</span>}
+          <span
+            className={cn({ 'opacity-50': props.disabled }, 'absolute left-2.5 opacity-80 text-sm')}>{startIcon}</span>}
         <input
           type={type}
           className={cn(
@@ -25,7 +26,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        {endIcon && <span className={cn({ 'opacity-50': props.disabled }, 'absolute right-2.5 text-sm')}>{endIcon}</span>}
+        {endIcon &&
+          <span className={cn({ 'opacity-50': props.disabled }, 'absolute right-2.5 text-sm')}>{endIcon}</span>}
       </div>
     );
   },

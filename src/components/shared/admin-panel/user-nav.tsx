@@ -10,13 +10,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { LayoutGrid, LogOut, Settings } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lock, LogOut, Settings } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import defaultAvatar from '@/assets/default-avatar.png';
 import useAuthStore from '@/store/auth-store.ts';
 
 export function UserNav() {
   const { user, signOut } = useAuthStore();
+  const { role } = useParams();
   return (
     <DropdownMenu>
       <Tooltip delayDuration={100}>
@@ -41,22 +42,22 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="hover:cursor-pointer" asChild>
-            <Link to="/dashboard" className="flex items-center">
-              <LayoutGrid className="w-4 h-4 mr-3 text-muted-foreground" />
-              Dashboard
+            <Link to={`/${role}/settings/profile`} className="flex items-center">
+              <Settings className="w-4 h-4 mr-3 text-muted-foreground" />
+              Cài đặt
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="hover:cursor-pointer" asChild>
-            <Link to="/settings" className="flex items-center">
-              <Settings className="w-4 h-4 mr-3 text-muted-foreground" />
-              Settings
+            <Link to={`/${role}/settings/password`} className="flex items-center">
+              <Lock className="w-4 h-4 mr-3 text-muted-foreground" />
+              Đổi mật khẩu
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="hover:cursor-pointer" onClick={() => signOut()}>
           <LogOut className="w-4 h-4 mr-3 text-muted-foreground" />
-          Sign out
+          Đăng xuất
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

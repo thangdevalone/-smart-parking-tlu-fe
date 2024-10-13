@@ -13,6 +13,7 @@ type AuthState = {
   tokens: Tokens | null;
   login: (data: LoginForm, navigate: NavigateFunction) => Promise<void>;
   signOut: () => void;
+  updateUser: (updatedUser: User) => void; // New updateUser function
 };
 
 const useAuthStore = create<AuthState>()(
@@ -50,6 +51,12 @@ const useAuthStore = create<AuthState>()(
             tokens: null,
           });
           toast.success('Bạn đã đăng xuất thành công!');
+        },
+        updateUser: (updatedUser: User) => {
+          set((state) => ({
+            user: { ...state.user, ...updatedUser }, // Merge existing user with updated data
+          }));
+          toast.success('Thông tin người dùng đã được cập nhật!');
         },
       }),
       {
