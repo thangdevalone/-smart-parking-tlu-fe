@@ -24,6 +24,7 @@ import { ManagerPassword } from './views/settings/manager-password';
 import { ManagerPersonalisation } from './views/settings/manager-personalisation';
 import BillPage from './views/manager-bill';
 import CardPage from './views/manager-card/card';
+import { Payment } from '@/views/payment';
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ function App() {
                   <Route path="cards" element={<CardPage />} />
                   <Route path="history" element={<HistoryPage />} />
                   <Route path="payment/bills" element={<BillPage />} />
+                  <Route path="payment/pay" element={<Payment />} />
                   <Route path="settings" element={<SettingsPage />}>
                     <Route index element={<Navigate to={'profile'} />} />
                     <Route path="profile" element={<ManagerProfile />} />
