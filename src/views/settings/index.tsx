@@ -30,7 +30,7 @@ export default function SettingsPage() {
   ];
   return (
     <ScrollArea className="h-screen">
-      <Link to="/home" className="flex w-fit flex-row items-center font-semibold mt-4 mb-3 ml-8">
+      <Link to={`${basePath}/dashboard`} className="flex w-fit flex-row items-center font-semibold mt-4 mb-3 ml-8">
         <CaretLeftIcon className="w-7 h-7" /> Trang chủ
       </Link>
       <div className=" space-y-6 px-10 pb-16 md:block">

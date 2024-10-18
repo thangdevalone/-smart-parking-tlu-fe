@@ -6,7 +6,7 @@ import useAppStore from '@/store/app-store';
 export function AdminPanelLayout() {
   const { collapseSidebar } = useAppStore();
   return (
-    <div>
+    <div className="overflow-hidden">
       <SideBar />
       <main
         className={cn(

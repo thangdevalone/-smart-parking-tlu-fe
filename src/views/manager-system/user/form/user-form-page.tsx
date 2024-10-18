@@ -35,16 +35,23 @@ export type UserValue = z.infer<typeof userSchema>;
 export default function UserFormPage() {
   const location = useLocation();
   const queryClient = useQueryClient();
-  const { basePath } = useAppPath();
+  const { basePath, navigateAppPath } = useAppPath();
   const param = queryString.parse(location.search);
   const form = useForm<UserValue>({
     resolver: zodResolver(userSchema),
+    defaultValues: {
+      fullName: '',
+      phone: undefined,
+      email: undefined,
+      userCode: '',
+      role: undefined,
+    },
   });
   const type = param?.type || DialogActionType.CREATE;
   const isEdit = type === DialogActionType.EDIT;
   const { data, isFetching } = useSpecificUserFetcher({
     options: { refetchOnWindowFocus: false, enabled: !!param?.id, retry: false },
-    id: String(param?.id),
+    id: Number(param?.id),
   });
   const rolesInApp = useAppStore(state => state.rolesInApp);
   const mutation = useMutation({
@@ -85,7 +92,7 @@ export default function UserFormPage() {
           initial={{ opacity: 0, x: 10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1, duration: 0.4 }}>
-          <Link to={`${basePath}/user`} className="flex mb-2 hover:underline w-fit flex-row gap-2 items-center">
+          <Link to={`${basePath}/users`} className="flex mb-2 hover:underline w-fit flex-row gap-2 items-center">
             <ChevronLeft className="w-5 h-5" />
             Trở lại
           </Link>
@@ -129,12 +136,26 @@ export default function UserFormPage() {
                 label="Email"
                 placeholder="example@gmail.com"
                 require
+                autoComplete="true"
               />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.4 }}
+            >
+              <TextField
+                name="phone"
+                label="Phone"
+                placeholder="09xxxx"
+                require
+                autoComplete="phone"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
             >
               <TextField
                 name="userCode"
@@ -146,10 +167,11 @@ export default function UserFormPage() {
             <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
+              transition={{ delay: 0.6, duration: 0.4 }}
             >
               <ComboboxField
                 name="role"
+                require
                 label="Vai trò"
                 placeholder="Chọn vai trò"
                 data={rolesInApp}
@@ -161,13 +183,17 @@ export default function UserFormPage() {
               transition={{ delay: 0.4, duration: 0.4 }} // Add animation for buttons
               className="flex flex-row gap-2 pt-2"
             >
-              <Button variant="secondary">
+              <Button type="button" onClick={() => navigateAppPath(['/users'])} variant="secondary">
                 Cancel
               </Button>
-              <Button variant="outline">
+              <Button type={'submit'} variant="outline">
                 Lưu & tạo mới
               </Button>
-              <Button>
+              <Button type="submit" onClick={() => {
+                if (form.formState.isValid) {
+                  navigateAppPath(['/users']);
+                }
+              }}>
                 Lưu
               </Button>
             </motion.div>

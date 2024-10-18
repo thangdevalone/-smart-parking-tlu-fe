@@ -56,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonWithIconProps>(
         {...props}
       >
         <>{loading ? (
-          <LoaderCircle className={'w-4 h-4 mr-2'} />
+          <LoaderCircle className={'w-4 h-4 mr-2 animate-spin'} />
         ) : (
           icon || null
         )}

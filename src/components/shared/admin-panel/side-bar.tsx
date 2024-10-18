@@ -32,7 +32,7 @@ export const SideBar = () => {
         </Button>
       </div>
       <div
-        className="relative overflow-x-hidden h-full flex flex-col  py-4 overflow-y-auto shadow-md dark:shadow-zinc-800">
+        className="relative gap-2 overflow-x-hidden h-full flex flex-col  py-4 overflow-y-auto shadow-md dark:shadow-zinc-800">
         <Link to="/" className={cn(
           'transition-transform ease-in-out duration-300 mb-1',
           !collapseSidebar ? 'translate-x-1' : 'translate-x-0',

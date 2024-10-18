@@ -12,6 +12,7 @@ type Menu = {
   label: string;
   active: boolean;
   icon: LucideIcon;
+  role: RoleInApp[]; // Change this to an array of RoleInApp
   submenus: Submenu[];
 };
 
@@ -21,7 +22,7 @@ type Group = {
 };
 
 export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp.GUARD>): Group[] {
-  return [
+  const allMenus: Group[] = [
     {
       groupLabel: '',
       menus: [
@@ -30,6 +31,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Tổng quan',
           active: pathname.includes('/dashboard'),
           icon: LayoutGrid,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [],
         },
       ],
@@ -40,13 +42,14 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
         {
           href: '',
           label: 'Hệ thống',
-          active: pathname.includes('/user') || pathname.includes('/roles'),
+          active: pathname.includes('/users') || pathname.includes('/roles'),
           icon: Users,
+          role: [RoleInApp.ADMIN],
           submenus: [
             {
-              href: `/${role}/user`,
+              href: `/${role}/users`,
               label: 'Người dùng',
-              active: pathname.includes(`/${role}/user`),
+              active: pathname.includes(`/${role}/users`),
             },
             {
               href: `/${role}/roles`,
@@ -60,6 +63,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Thẻ gửi xe',
           active: pathname.includes('/card-type') || pathname.includes('/card'),
           icon: IdCard,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [
             {
               href: `/${role}/cards`,
@@ -78,6 +82,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Chỗ để xe',
           active: pathname.includes('/car-park'),
           icon: MapPin,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [],
         },
         {
@@ -85,6 +90,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Danh mục hình ảnh',
           active: pathname.includes('/history'),
           icon: Bookmark,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [],
         },
         {
@@ -92,6 +98,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Chi trả',
           active: pathname.includes('/payment'),
           icon: HandCoins,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [
             {
               href: `/${role}/payment/pay`,
@@ -115,6 +122,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Cài đặt',
           active: pathname.includes(`/${role}/settings`),
           icon: Settings,
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [
             {
               href: `/${role}/settings/profile`,
@@ -125,7 +133,8 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
               href: `/${role}/settings/password`,
               label: 'Quản lý mật khẩu',
               active: pathname === `/${role}/settings/password`,
-            },{
+            },
+            {
               href: `/${role}/settings/personalisation`,
               label: 'Cá nhân hoá',
               active: pathname === `/${role}/settings/personalisation`,
@@ -135,4 +144,10 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
       ],
     },
   ];
+
+  // Filter menus based on role
+  return allMenus.map(group => ({
+    groupLabel: group.groupLabel,
+    menus: group.menus.filter(menu => menu.role.includes(role)),
+  })).filter(group => group.menus.length > 0);
 }

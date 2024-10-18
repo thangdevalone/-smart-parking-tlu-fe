@@ -25,6 +25,7 @@ import { ManagerPersonalisation } from './views/settings/manager-personalisation
 import BillPage from './views/manager-bill';
 import CardPage from './views/manager-card/card';
 import { Payment } from '@/views/payment';
+import AdminProtect from '@/components/protect-route/admin-protect.tsx';
 
 const queryClient = new QueryClient();
 
@@ -40,11 +41,14 @@ function App() {
                 <Route path=":role" element={<RoleNavigate />}>
                   <Route index element={<Navigate to="dashboard" />} />
                   <Route path="dashboard" element={<Dashboard />} />
-                  <Route path="user" element={<UserPage />}>
-                    <Route index element={<UserTable />} />
-                    <Route path="form" element={<UserForm />} />
+                  <Route element={<AdminProtect />}>
+                    <Route path="users" element={<UserPage />}>
+                      <Route index element={<UserTable />} />
+                      <Route path="form" element={<UserForm />} />
+                    </Route>
+                    <Route path="roles" element={<RolePage />} />
                   </Route>
-                  <Route path="roles" element={<RolePage />} />
+
                   <Route path="card-type" element={<CardTypePage />} />
                   <Route path="cards" element={<CardPage />} />
                   <Route path="history" element={<HistoryPage />} />

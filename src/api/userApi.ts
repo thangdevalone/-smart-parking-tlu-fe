@@ -13,7 +13,7 @@ export const userApi = {
     return await axiosClient.get<SuccessResponse<User>>(url);
   },
   async addUser(data: UserValue) {
-    const url = `/users`;
+    const url = `/auth/register`;
     return await axiosClient.post<SuccessResponse<User>>(url, data);
   },
   async updateUser(id: number, data: any) {
