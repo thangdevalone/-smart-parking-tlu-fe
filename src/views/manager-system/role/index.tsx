@@ -10,15 +10,17 @@ import {
   import { Card, CardContent } from '@/components/ui/card.tsx';
   import { ContentLayout } from '@/components/layouts';
 import { RoleTable } from './table/role-table';
+import { useAppPath } from '@/hooks';
   
   export default function RolePage() {
+    const {basePath}=useAppPath()
     return (
       <ContentLayout title="Hệ thống">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to="/">Trang chủ</Link>
+                <Link to={basePath}>Trang chủ</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

@@ -10,15 +10,18 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { ContentLayout } from '@/components/layouts';
 import { BillTable } from './table/bill-table';
+import { useAppPath } from '@/hooks';
 
 export default function BillPage() {
+  const { basePath } = useAppPath();
+
   return (
     <ContentLayout title="Hoá đơn">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/">Trang chủ</Link>
+              <Link to={basePath}>Trang chủ</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

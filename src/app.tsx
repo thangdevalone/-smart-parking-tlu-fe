@@ -10,7 +10,6 @@ import { Toaster } from 'sonner';
 import RoleNavigate from '@/components/protect-route/role-navigate.tsx';
 import LandingPage from '@/views/landing-page';
 import AuthProtect from '@/components/protect-route/auth-protect.tsx';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AlertDialogProvider } from '@/components/providers/alert-dialog-provider.tsx';
 import UserPage from '@/views/manager-system/user';
 import CardTypePage from '@/views/manager-card/card-type';
@@ -26,10 +25,27 @@ import BillPage from './views/manager-bill';
 import CardPage from './views/manager-card/card';
 import { Payment } from '@/views/payment';
 import AdminProtect from '@/components/protect-route/admin-protect.tsx';
+import GuardViews from '@/views/guards';
+import useAuthStore from '@/store/auth-store.ts';
+import { RoleInApp } from '@/types';
 
 const queryClient = new QueryClient();
 
+const AdminRoutes = () => (
+  <>
+    <Route path="users" element={<UserPage />}>
+      <Route index element={<UserTable />} />
+      <Route path="form" element={<UserForm />} />
+    </Route>
+    <Route path="roles" element={<RolePage />} />
+    <Route path="card-type" element={<CardTypePage />} />
+  </>
+);
+
 function App() {
+  const { user } = useAuthStore();
+  const roleName = user?.role.name;
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
@@ -39,27 +55,30 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route element={<AuthProtect />}>
                 <Route path=":role" element={<RoleNavigate />}>
-                  <Route index element={<Navigate to="dashboard" />} />
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route element={<AdminProtect />}>
-                    <Route path="users" element={<UserPage />}>
-                      <Route index element={<UserTable />} />
-                      <Route path="form" element={<UserForm />} />
-                    </Route>
-                    <Route path="roles" element={<RolePage />} />
-                  </Route>
-
-                  <Route path="card-type" element={<CardTypePage />} />
-                  <Route path="cards" element={<CardPage />} />
-                  <Route path="history" element={<HistoryPage />} />
-                  <Route path="payment/bills" element={<BillPage />} />
-                  <Route path="payment/pay" element={<Payment />} />
-                  <Route path="settings" element={<SettingsPage />}>
-                    <Route index element={<Navigate to={'profile'} />} />
-                    <Route path="profile" element={<ManagerProfile />} />
-                    <Route path="password" element={<ManagerPassword />} />
-                    <Route path="personalisation" element={<ManagerPersonalisation />} />
-                  </Route>
+                  {roleName === RoleInApp.GUARD ? (
+                    <>
+                      <Route index element={<Navigate to="view" />} />
+                      <Route path="view" element={<GuardViews />} />
+                    </>
+                  ) : (
+                    <>
+                      <Route index element={<Navigate to="dashboard" />} />
+                      <Route path="dashboard" element={<Dashboard />} />
+                      <Route element={<AdminProtect />}>
+                        {AdminRoutes()}
+                      </Route>
+                      <Route path="cards" element={<CardPage />} />
+                      <Route path="history" element={<HistoryPage />} />
+                      <Route path="payment/bills" element={<BillPage />} />
+                      <Route path="payment/pay" element={<Payment />} />
+                      <Route path="settings" element={<SettingsPage />}>
+                        <Route index element={<Navigate to="profile" />} />
+                        <Route path="profile" element={<ManagerProfile />} />
+                        <Route path="password" element={<ManagerPassword />} />
+                        <Route path="personalisation" element={<ManagerPersonalisation />} />
+                      </Route>
+                    </>
+                  )}
                 </Route>
                 <Route path="auth" element={<AuthLayout />}>
                   <Route index element={<Navigate to="login" />} />
@@ -69,15 +88,18 @@ function App() {
               <Route path="not-found" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-            <Toaster closeButton richColors toastOptions={{
-              classNames: {
-                error: 'bg-red-400',
-                success: 'bg-green-400',
-                warning: 'bg-yellow-400',
-                info: 'bg-blue-400',
-              },
-            }} />
-            <ReactQueryDevtools initialIsOpen={false} />
+            <Toaster
+              closeButton
+              richColors
+              toastOptions={{
+                classNames: {
+                  error: 'bg-red-400',
+                  success: 'bg-green-400',
+                  warning: 'bg-yellow-400',
+                  info: 'bg-blue-400',
+                },
+              }}
+            />
           </AlertDialogProvider>
         </TooltipProvider>
       </ThemeProvider>

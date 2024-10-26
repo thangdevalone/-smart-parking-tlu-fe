@@ -5,6 +5,7 @@ type Submenu = {
   href: string;
   label: string;
   active: boolean;
+  role?: RoleInApp[];
 };
 
 type Menu = {
@@ -73,6 +74,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
             {
               href: `/${role}/card-type`,
               label: 'Loại thẻ',
+              role: [RoleInApp.ADMIN],
               active: pathname === `/${role}/card-type`,
             },
           ],
@@ -145,9 +147,18 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
     },
   ];
 
-  // Filter menus based on role
-  return allMenus.map(group => ({
-    groupLabel: group.groupLabel,
-    menus: group.menus.filter(menu => menu.role.includes(role)),
-  })).filter(group => group.menus.length > 0);
+  return allMenus
+    .map(group => ({
+      groupLabel: group.groupLabel,
+      menus: group.menus
+        .filter(menu => menu.role.includes(role)) // Filter menus by role
+        .map(menu => ({
+          ...menu,
+          submenus: menu.submenus.filter(submenu => {
+            const submenuRole = submenu.role ?? menu.role;
+            return submenuRole.includes(role);
+          }),
+        })),
+    }))
+    .filter(group => group.menus.length > 0);
 }
