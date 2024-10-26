@@ -15,9 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Eye, Pencil } from 'lucide-react';
 import { useAppPath } from '@/hooks';
-import { DialogActionType, User } from '@/types';
-import { KeyDialogs } from '@/constants';
-import { useDialogStore } from '@/store/dialog-state-store.ts';
+import { User } from '@/types';
 import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu';
 
 
@@ -30,7 +28,6 @@ export function UserHandler(props: UserRowActionsProps) {
     row,
   } = props;
   const { navigateAppPath } = useAppPath();
-  const { setDialogState } = useDialogStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -44,13 +41,9 @@ export function UserHandler(props: UserRowActionsProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="w-[160px]">
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => navigateAppPath(['card-type', String(row.original.id)])}
+          <DropdownMenuItem onClick={() => navigateAppPath(['users', String(row.original.id)])}
                             className="cursor-pointer"><Eye className="h-4 mr-2 w-4" /> Xem</DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer" onClick={() => setDialogState(KeyDialogs.cardType, {
-            open: true,
-            actionType: DialogActionType.EDIT,
-            data: row.original,
-          })}><Pencil
+          <DropdownMenuItem className="cursor-pointer"><Pencil
             className="h-4 mr-2 w-4" />Chỉnh sửa</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

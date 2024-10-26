@@ -1,9 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { History } from '@/types';
-import { formatCurrencyVND } from '@/lib/utils';
 import { format } from 'date-fns';
 import { BACKEND_HOST, ConvertColumnIDs } from '@/constants';
+import { CurrencyFormatter } from '@/lib/currency-formater.ts';
 
 export const historyColumns: ColumnDef<History>[] = [
   {
@@ -23,7 +23,7 @@ export const historyColumns: ColumnDef<History>[] = [
       const imageUrl = `${BACKEND_HOST}uploads/${imageInPath.split('uploads')[1]}`;
       return (
         <div>
-          <img className='h-12 w-12' src={imageUrl} alt="Ảnh vào" />
+          <img className="h-12 w-12" src={imageUrl} alt="Ảnh vào" />
         </div>
       );
     },
@@ -41,11 +41,12 @@ export const historyColumns: ColumnDef<History>[] = [
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['imageOut']} />
     ),
     cell: ({ row }) => {
-      const imageInPath = row.getValue('imageOut') as string ?? "";
+      const imageInPath = row.getValue('imageOut') as string ?? '';
       const imageUrl = `${BACKEND_HOST}uploads/${imageInPath.split('uploads')[1]}`;
       return (
         <div>
-          {imageInPath ? <img className='h-12 w-12' src={imageUrl} /> : <h3 className='text-red-600 uppercase font-medium'>chưa checkout</h3>}
+          {imageInPath ? <img className="h-12 w-12" src={imageUrl} alt="def" /> :
+            <h3 className="text-red-600 uppercase font-medium">chưa checkout</h3>}
         </div>
       );
     },
@@ -64,7 +65,7 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('bill') as any;
-      return <div>{bill ? formatCurrencyVND(bill.price) : 'N/A'}</div>;
+      return <div>{bill ? CurrencyFormatter.toVND(bill.price) : 'N/A'}</div>;
     },
   },
   {
@@ -74,7 +75,7 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('bill') as any;
-      return <div>{bill.price ? "Vé ngày" : 'Vé tháng'}</div>;
+      return <div>{bill.price ? 'Vé ngày' : 'Vé tháng'}</div>;
     },
   },
 ];

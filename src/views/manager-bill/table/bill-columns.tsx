@@ -1,9 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { Bill } from '@/types';
-import { formatCurrencyVND } from '@/lib/utils';
 import { format } from 'date-fns';
 import { ConvertColumnIDs } from '@/constants';
+import { CurrencyFormatter } from '@/lib/currency-formater.ts';
 
 export const billColumns: ColumnDef<Bill>[] = [
   {
@@ -34,7 +34,7 @@ export const billColumns: ColumnDef<Bill>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('price') as number;
-      return <div>{bill ? formatCurrencyVND(bill) : 'N/A'}</div>;
+      return <div>{bill ? CurrencyFormatter.toVND(bill) : 'N/A'}</div>;
     },
   },
   {
@@ -42,6 +42,6 @@ export const billColumns: ColumnDef<Bill>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['Status']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('billStatus') === 'paid' ? "Đã thanh toán" : "Chưa thanh toán"}</div>,
+    cell: ({ row }) => <div>{row.getValue('billStatus') === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán'}</div>,
   },
 ];

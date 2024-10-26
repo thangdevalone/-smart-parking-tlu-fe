@@ -10,15 +10,18 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card.tsx';
 import { ContentLayout } from '@/components/layouts';
 import { HistoryTable } from './table/history-table';
+import { useAppPath } from '@/hooks';
 
 export default function HistoryPage() {
+  const { basePath } = useAppPath();
+
   return (
     <ContentLayout title="Danh mục hình ảnh">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/">Trang chủ</Link>
+              <Link to={basePath}>Trang chủ</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

@@ -19,7 +19,7 @@ export function UserToolbar<TData>(props: DataTableToolbarProps<TData>) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
-        <Button onClick={() => navigateAppPath(['user', 'form?type=create'])} icon={<Plus className="w-4 h-4 mr-2" />}>
+        <Button onClick={() => navigateAppPath(['users', 'form?type=create'])} icon={<Plus className="w-4 h-4 mr-2" />}>
           Thêm mới
         </Button>
         <div>

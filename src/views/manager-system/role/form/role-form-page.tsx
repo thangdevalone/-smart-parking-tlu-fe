@@ -33,12 +33,11 @@ export default function RoleForm() {
     defaultValues: {
       name: '',
       description: '',
-    }
+    },
   });
 
   const currentDialog = dialogs[KeyDialogs.role];
   const isEdit = currentDialog?.action === DialogActionType.EDIT;
-
   useEffect(() => {
     if (isEdit) {
       console.log('currentDialog.data', currentDialog.data);

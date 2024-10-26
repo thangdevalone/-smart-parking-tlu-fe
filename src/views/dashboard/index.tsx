@@ -3,7 +3,7 @@ import { Charts } from '@/views/dashboard/components';
 
 const Dashboard = () => {
   return (
-    <ContentLayout className="bg-background" title="Dashboard">
+    <ContentLayout className="bg-background overflow-y-auto" title="Dashboard">
       <Charts />
     </ContentLayout>
   );
