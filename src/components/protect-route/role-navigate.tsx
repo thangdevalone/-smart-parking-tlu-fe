@@ -28,7 +28,7 @@ export default function RoleNavigate() {
       case RoleInApp.ADMIN:
         return viewSetting ? <Outlet /> : <AdminPanelLayout />;
       default:
-        return <Navigate to="/not-found" replace />;
+        return <Navigate to="/" replace />;
     }
   }
 

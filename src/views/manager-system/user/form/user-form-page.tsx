@@ -18,14 +18,14 @@ import useAppStore from '@/store/app-store.ts'; // Import framer-motion
 
 const userSchema = z.object({
   fullName: z.string().min(1, {
-    message: 'Cần điền họ tên',
+    message: 'Họ tên không được để trống',
   }),
   phone: z.string()
     .min(1, { message: 'Số điện thoại không được để trống' })
     .regex(/^(?:\+84|0)[1-9]\d{8,9}$/, {
       message: 'Số điện thoại không hợp lệ',
     }),
-  email: z.string().email({ message: 'Email không hợp lệ' }),
+  email: z.string().min(1, { message: 'Số điện thoại không được để trống' }).email({ message: 'Email không hợp lệ' }),
   userCode: z.string().min(1, { message: 'Mã người dùng không được để trống' }),
   role: z.string().min(1, { message: 'Vai trò không được để trống' }),
 });
@@ -146,7 +146,7 @@ export default function UserFormPage() {
             >
               <TextField
                 name="phone"
-                label="Phone"
+                label="Số điện thoại"
                 placeholder="09xxxx"
                 require
                 autoComplete="phone"
@@ -186,15 +186,8 @@ export default function UserFormPage() {
               <Button type="button" onClick={() => navigateAppPath(['/users'])} variant="secondary">
                 Cancel
               </Button>
-              <Button type={'submit'} variant="outline">
+              <Button type={'submit'}>
                 Lưu & tạo mới
-              </Button>
-              <Button type="submit" onClick={() => {
-                if (form.formState.isValid) {
-                  navigateAppPath(['/users']);
-                }
-              }}>
-                Lưu
               </Button>
             </motion.div>
           </form>

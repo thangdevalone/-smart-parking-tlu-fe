@@ -1,7 +1,8 @@
-import { Button } from '@/components/ui/button.tsx';
-import { LogIn, LogOut } from 'lucide-react';
+
 import { Separator } from '@/components/ui/separator.tsx';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
+import { ToggleGateInButton, ToggleGateOutButton } from '@/views/guards/components/action.tsx';
+
 
 export default function ActionGroup() {
   return (
@@ -9,22 +10,17 @@ export default function ActionGroup() {
       <div className="space-y-3">
         <p className="text-lg font-semibold">Hành động</p>
         <div className="xl:gap-4 gap-2 flex flex-wrap xl:flex-nowrap">
-          <Button className="h-16 px-8 w-full text-base bg-default-red"
-                  icon={<LogIn className="w-4 h-4 mr-2" />}>
-            Đóng/mở cổng vào
-          </Button>
-          <Button className="h-16 px-8 w-full text-base bg-default-blue" icon={<LogOut className="w-4 h-4 mr-2" />}>
-            Đóng/mở cổng ra
-          </Button>
+          <ToggleGateInButton />
+          <ToggleGateOutButton />
         </div>
-        <div className=" flex-col lg:flex hidden">
+        <div className="flex-col lg:flex hidden">
           <p><span className="font-medium">Tổng số xe hiện có:</span> 100 xe</p>
           <p><span className="font-medium">Tổng số xe có thể chứa:</span> 200 xe</p>
         </div>
       </div>
       <Separator orientation="vertical" className="lg:block hidden" />
       <div className="space-y-3">
-        <p className="text-lg font-semibold ">Công cụ</p>
+        <p className="text-lg font-semibold">Công cụ</p>
         <div className="items-top flex space-x-2">
           <Checkbox id="terms1" />
           <div className="grid gap-1.5 leading-none">
@@ -40,10 +36,10 @@ export default function ActionGroup() {
           </div>
         </div>
         <div className="items-top flex space-x-2">
-          <Checkbox id="terms1" />
+          <Checkbox id="terms2" />
           <div className="grid gap-1.5 leading-none">
             <label
-              htmlFor="terms1"
+              htmlFor="terms2"
               className="text-sm font-medium xl:leading-none leading-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Cảnh báo đầy bãi đỗ xe
@@ -55,6 +51,5 @@ export default function ActionGroup() {
         </div>
       </div>
     </div>
-  )
-    ;
+  );
 }

@@ -54,7 +54,7 @@ export const userColumns: ColumnDef<User>[] = [
   {
     accessorKey: 'userCode',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Mã sinh viên" />
+      <DataTableColumnHeader column={column} title="Tên đăng nhập" />
     ),
     cell: ({ row }) => <div>{row.getValue('userCode')}</div>,
   },
