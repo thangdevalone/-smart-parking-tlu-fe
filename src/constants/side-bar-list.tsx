@@ -1,4 +1,4 @@
-import { Bookmark, HandCoins, IdCard, LayoutGrid, LucideIcon, MapPin, Settings, Users } from 'lucide-react';
+import { Bookmark, HandCoins, IdCard, LayoutGrid, LucideIcon, MapPin, Users } from 'lucide-react';
 import { RoleInApp } from '@/types';
 
 type Submenu = {
@@ -84,7 +84,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Chỗ để xe',
           active: pathname.includes('/car-park'),
           icon: MapPin,
-          role: [RoleInApp.ADMIN, RoleInApp.USER],
+          role: [RoleInApp.ADMIN],
           submenus: [],
         },
         {
@@ -111,35 +111,6 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
               href: `/${role}/payment/bills`,
               label: 'Hóa đơn',
               active: pathname === `/${role}/payment/bills`,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      groupLabel: 'Cấu hình',
-      menus: [
-        {
-          href: `/${role}/settings`,
-          label: 'Cài đặt',
-          active: pathname.includes(`/${role}/settings`),
-          icon: Settings,
-          role: [RoleInApp.ADMIN, RoleInApp.USER],
-          submenus: [
-            {
-              href: `/${role}/settings/profile`,
-              label: 'Thông tin cá nhân',
-              active: pathname === `/${role}/settings/profile`,
-            },
-            {
-              href: `/${role}/settings/password`,
-              label: 'Quản lý mật khẩu',
-              active: pathname === `/${role}/settings/password`,
-            },
-            {
-              href: `/${role}/settings/personalisation`,
-              label: 'Cá nhân hoá',
-              active: pathname === `/${role}/settings/personalisation`,
             },
           ],
         },

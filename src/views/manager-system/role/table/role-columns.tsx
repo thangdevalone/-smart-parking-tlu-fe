@@ -40,14 +40,14 @@ export const roleColumns: ColumnDef<Role>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Role" />
+      <DataTableColumnHeader column={column} title="Vai trò" />
     ),
     cell: ({ row }) => <div>{row.getValue('name')}</div>,
   },
   {
     accessorKey: 'description',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Description" />
+      <DataTableColumnHeader column={column} title="Mô tả" />
     ),
     cell: ({ row }) => <div>{row.getValue('description')}</div>,
   },
