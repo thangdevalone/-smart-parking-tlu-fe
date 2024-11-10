@@ -25,6 +25,9 @@ const cardSchema = z.object({
   cardType: z.string().min(1, {
     message: 'Cần chọn loại thẻ',
   }),
+  idCard: z.string().min(1, {
+    message: 'Cần nhập mã thẻ',
+  }),
   userId: z.string().optional(),
   cardStatus: z.enum(['active', 'inactive']).default('active'),
 });
@@ -69,6 +72,7 @@ export function CardForm() {
   useEffect(() => {
     if (isEdit) {
       const data = currentDialog.data;
+      form.setValue('idCard', data?.idCard);
       form.setValue('userId', data?.userId + "");
       form.setValue('cardType', data?.cardType.id + "");
       form.setValue('cardCode', data?.cardCode);
@@ -87,7 +91,7 @@ export function CardForm() {
       queryClient.invalidateQueries({ queryKey: ['card'] }).then(() => {
         form.reset();
         toast.success(data.message);
-        closeDialog(KeyDialogs.cardType);
+        closeDialog(KeyDialogs.card);
       });
     },
     onError: (error: any) => {
@@ -108,6 +112,12 @@ export function CardForm() {
         <TextField
           name="cardCode"
           label="Tên thẻ"
+          placeholder="Nhập tên thẻ"
+          require
+        />
+        <TextField
+          name="idCard"
+          label="Mã thẻ"
           placeholder="Nhập tên thẻ"
           require
         />

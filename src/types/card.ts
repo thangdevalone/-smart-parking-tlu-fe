@@ -14,6 +14,7 @@ export interface Card {
 export interface CardType {
   id: number;
   cardTypeName: string;
+  idCard: string;
   cardTypePrice: number;
   cards: Card[];
   createdAt: Date;
