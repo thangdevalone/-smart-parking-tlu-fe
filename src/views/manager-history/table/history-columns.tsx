@@ -4,6 +4,7 @@ import { History } from '@/types';
 import { format } from 'date-fns';
 import { BACKEND_HOST, ConvertColumnIDs } from '@/constants';
 import { CurrencyFormatter } from '@/lib/currency-formater.ts';
+import { HistoryHandle } from '@/views/manager-history/table/history-action.tsx';
 
 export const historyColumns: ColumnDef<History>[] = [
   {
@@ -56,7 +57,8 @@ export const historyColumns: ColumnDef<History>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['endDate']} />
     ),
-    cell: ({ row }) => <div>{format(new Date(row.getValue('timeOut')), 'dd/MM/yyyy HH:mm:ss')}</div>,
+    cell: ({ row }) =>
+      <div>{row.getValue('timeOut') ? format(new Date(row.getValue('timeOut')), 'dd/MM/yyyy HH:mm:ss') : ''}</div>,
   },
   {
     accessorKey: 'bill',
@@ -75,7 +77,12 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('bill') as any;
-      return <div>{bill.price ? 'Vé ngày' : 'Vé tháng'}</div>;
+      return <div>{+bill.price ? 'Vé ngày' : 'Vé tháng'}</div>;
     },
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => <HistoryHandle row={row} />,
+    enableHiding: false,
   },
 ];
