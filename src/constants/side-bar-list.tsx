@@ -32,7 +32,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Tổng quan',
           active: pathname.includes('/dashboard'),
           icon: LayoutGrid,
-          role: [RoleInApp.ADMIN, RoleInApp.USER],
+          role: [RoleInApp.ADMIN],
           submenus: [],
         },
       ],

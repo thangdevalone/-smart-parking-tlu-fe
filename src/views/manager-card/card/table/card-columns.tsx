@@ -5,6 +5,7 @@ import { Card } from '@/types/card.ts';
 import { ConvertColumnIDs } from '@/constants';
 import { format } from 'date-fns';
 import { CardHandler } from './card-handler';
+import { renderStatus } from '@/components/shared/reuse.tsx';
 
 const cardColumns: ColumnDef<Card>[] = [
   {
@@ -50,9 +51,9 @@ const cardColumns: ColumnDef<Card>[] = [
   {
     accessorKey: 'cardStatus',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['tatus']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['status']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('cardStatus')}</div>,
+    cell: ({ row }) => <div>{renderStatus(row.getValue('cardStatus'))}</div>,
   },
   {
     accessorKey: 'cardType',

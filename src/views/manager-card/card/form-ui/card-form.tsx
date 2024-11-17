@@ -15,7 +15,7 @@ import { KeyDialogs } from '@/constants';
 import { CardType, DialogActionType, User } from '@/types';
 import {
   SelectItem,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import { userApi } from '@/api/userApi';
 
 const cardSchema = z.object({
@@ -28,13 +28,15 @@ const cardSchema = z.object({
   idCard: z.string().min(1, {
     message: 'Cần nhập mã thẻ',
   }),
-  userId: z.string().optional(),
+  userId: z.string().min(1, {
+    message: 'Cần chọn sở hữu cho thẻ',
+  }),
   cardStatus: z.enum(['active', 'inactive']).default('active'),
 });
 
 const statusOptions = [
   { value: 'active', label: 'Hoạt động' },
-  { value: 'inactive', label: 'khoá' },
+  { value: 'inactive', label: 'Khoá' },
 ];
 
 export type CardValue = z.infer<typeof cardSchema>;
@@ -62,7 +64,7 @@ export function CardForm() {
     resolver: zodResolver(cardSchema),
     defaultValues: {
       cardCode: '',
-      cardType: "",
+      cardType: '',
     },
   });
 
@@ -73,8 +75,8 @@ export function CardForm() {
     if (isEdit) {
       const data = currentDialog.data;
       form.setValue('idCard', data?.idCard);
-      form.setValue('userId', data?.userId + "");
-      form.setValue('cardType', data?.cardType.id + "");
+      form.setValue('userId', data?.userId + '');
+      form.setValue('cardType', data?.cardType.id + '');
       form.setValue('cardCode', data?.cardCode);
       form.setValue('cardStatus', data?.cardStatus);
 
@@ -121,7 +123,7 @@ export function CardForm() {
           placeholder="Nhập tên thẻ"
           require
         />
-        <SelectionField label="Người dùng" name="userId" placeholder="Select a user">
+        <SelectionField require label="Sở hữu" name="userId" placeholder="Select a user">
           {users.map((user) => (
             <SelectItem key={user.id} value={user.id + ''}>
               {user.fullName}
@@ -135,16 +137,16 @@ export function CardForm() {
             </SelectItem>
           ))}
         </SelectionField>
-        <SelectionField label="Trạng thái" defaultValue='active' name="cardStatus" placeholder="Select a status">
+        <SelectionField label="Trạng thái" defaultValue="active" name="cardStatus" placeholder="Select a status">
           {statusOptions.map((status) => (
             <SelectItem key={status.value} value={status.value}>
               {status.label}
             </SelectItem>
           ))}
         </SelectionField>
-        <DialogFooter>
-          <DialogClose className={cn(buttonVariants({ variant: 'outline' }))}>Cancel</DialogClose>
-          <Button loading={mutation.isPending} type="submit">Submit</Button>
+        <DialogFooter className="pt-2">
+          <DialogClose className={cn(buttonVariants({ variant: 'outline' }))}>Huỷ</DialogClose>
+          <Button loading={mutation.isPending} type="submit">{isEdit ? 'Cập nhật' : 'Tạo'}</Button>
         </DialogFooter>
       </form>
     </Form>

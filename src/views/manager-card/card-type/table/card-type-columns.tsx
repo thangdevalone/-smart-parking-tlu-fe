@@ -5,6 +5,7 @@ import { CardType } from '@/types/card.ts';
 import { ConvertColumnIDs } from '@/constants';
 import { format } from 'date-fns';
 import { CardTypeHandler } from '@/views/manager-card/card-type/table/card-type-handler.tsx';
+import { CurrencyFormatter } from '@/lib/currency-formater.ts';
 
 const cardTypeColumns: ColumnDef<CardType>[] = [
   {
@@ -52,7 +53,7 @@ const cardTypeColumns: ColumnDef<CardType>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypePrice']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('cardTypePrice')}</div>,
+    cell: ({ row }) => <div>{CurrencyFormatter.toVND(Number(row.getValue('cardTypePrice')))}</div>,
   },
   {
     accessorKey: 'createdAt',

@@ -25,6 +25,12 @@ module.exports = {
 
       },
       colors: {
+        app: {
+          active: 'hsl(var(--active))',
+          inactive: 'hsl(var(--inactive))',
+          success: 'hsl(var(--success))',
+          pending: 'hsl(var(--pending))',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -42,7 +48,33 @@ module.exports = {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+          alpha20: '#43f5ed33',
         },
+        neutral: {
+          100: '#ffffff',
+          200: '#ececec',
+          300: '#dadada',
+          400: '#c7c7c7',
+          500: '#a7a7a7',
+          600: '#909090',
+          700: '#7e7e7e',
+          800: '#6d6d6d',
+          900: '#525252',
+          1000: '#383838',
+          1100: '#272727',
+          1200: '#181818',
+          alpha10: '#ffffff19',
+          alpha15: '#ffffff26',
+          alpha20: '#ffffff33',
+          alpha25: '#ffffff3f',
+          alpha30: '#ffffff4c',
+          alpha35: '#ffffff59',
+          alpha40: '#ffffff66',
+          alpha45: '#ffffff72',
+          alpha50: '#ffffff7f',
+          alpha75: '#ffffffbf',
+        },
+
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',

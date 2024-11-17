@@ -42,7 +42,10 @@ export  function CardTypeForm() {
 
   useEffect(() => {
     if (isEdit) {
-      form.reset(currentDialog.data);
+      form.reset({
+        cardTypeName: currentDialog.data.cardTypeName,
+        cardTypePrice: Number(currentDialog.data.cardTypePrice),
+      });
     }
   }, [isEdit, currentDialog?.data]);
 

@@ -21,13 +21,13 @@ import SettingsPage from './views/settings';
 import { ManagerProfile } from './views/settings/manager-profile';
 import { ManagerPassword } from './views/settings/manager-password';
 import { ManagerPersonalisation } from './views/settings/manager-personalisation';
-import BillPage from './views/manager-bill';
 import CardPage from './views/manager-card/card';
-import { Payment } from '@/views/payment';
 import AdminProtect from '@/components/protect-route/admin-protect.tsx';
 import GuardViews from '@/views/guards';
 import useAuthStore from '@/store/auth-store.ts';
 import { RoleInApp } from '@/types';
+import BillPage from '@/views/manager-pay/manager-bill';
+import { Payment } from '@/views/manager-pay/payment';
 
 const queryClient = new QueryClient();
 
