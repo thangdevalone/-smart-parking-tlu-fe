@@ -6,8 +6,8 @@ export const ConvertColumnIDs: { [key: string]: string } = {
   'updatedAt': 'Sửa lúc',
   'cardCode': 'Tên thẻ',
   'status': 'Trạng thái',
-  'startDate' : 'Thời gian vào',
-  'endDate' : 'Thời gian ra',
+  'startDate': 'Thời gian vào',
+  'endDate': 'Thời gian ra',
   'price': 'Giá tiền',
   'imageIn': 'Ảnh vào',
   'imageOut': 'Ảnh ra',
@@ -30,20 +30,19 @@ export class ColorConfig {
   public static getStatusColor(status: keyof typeof ColorConfig.config) {
     const background = ColorConfig.config[status] || 'transparent';
     const foreground = ColorConfig.config[`${status}-foreground` as keyof typeof ColorConfig.config];
-    return {background, foreground};
+    return { background, foreground };
   }
 }
+
 export type ColorConfigKey = keyof typeof ColorConfig.config;
-
-
-
 
 
 export const KeyDialogs = {
   cardType: 'card-type',
   card: 'card',
   role: 'role',
-  resetPassowrdUser: "reset-password-user",
-  paymentVNpay:'paymentvnpay'
+  resetPassowrdUser: 'reset-password-user',
+  paymentVNpay: 'paymentvnpay',
+  history: 'history',
 };
 export type IKeyDialog = typeof KeyDialogs[keyof typeof KeyDialogs];
