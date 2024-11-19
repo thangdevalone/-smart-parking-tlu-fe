@@ -3,7 +3,7 @@ import CameraGroup from '@/views/guards/components/camera-group.tsx';
 import ActionGroup from '@/views/guards/components/action-group.tsx';
 import HistoryGroup from '@/views/guards/components/history-group.tsx';
 import StatisticGroup from '@/views/guards/components/statistic-group.tsx';
-import { off, onValue, ref } from 'firebase/database';
+import { off, onValue, ref, set } from 'firebase/database';
 import { database } from '@/firebase.ts';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog.tsx';
 import { appConfig } from '@/configs';
@@ -37,14 +37,17 @@ const GuardViews: React.FC = () => {
       off(connectorGateOut);
     };
   }, []);
+  console.log(gateInCard, gateOutCard);
 
   const checkin = async () => {
     setImageIn(appConfig.cam_in + '/capture');
+    await set(ref(database, '/gates/gate_1/card_id'), '');
     const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
     setRes(res.data);
   };
   const checkout = async () => {
     setImageOut(appConfig.cam_out + '/capture');
+    await set(ref(database, '/gates/gate_2/card_id'), '');
     const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
     setRes2(res.data);
   };

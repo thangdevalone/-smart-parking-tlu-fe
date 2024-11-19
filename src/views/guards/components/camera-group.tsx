@@ -9,7 +9,7 @@ export default function CameraGroup() {
         alt="img" />
       <img
         className="border-[red] border"
-        src={appConfig.cam_in + ':81/stream'}
+        src={appConfig.cam_out + ':81/stream'}
 
         alt="img" />
     </div>
