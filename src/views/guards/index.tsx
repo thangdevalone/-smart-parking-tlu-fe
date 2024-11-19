@@ -16,6 +16,8 @@ const GuardViews: React.FC = () => {
   const [open2, setOpen2] = useState(false);
   const [gateInCard, setGateInCard] = useState<string>('');
   const [gateOutCard, setGateOutCard] = useState<string>('');
+  const [imageIn, setImageIn] = useState<string>('');
+  const [imageOut, setImageOut] = useState<string>('');
   const [res, setRes] = useState<any>();
   const [res2, setRes2] = useState<any>();
 
@@ -37,10 +39,12 @@ const GuardViews: React.FC = () => {
   }, []);
 
   const checkin = async () => {
+    setImageIn(appConfig.cam_in + '/capture');
     const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
     setRes(res.data);
   };
   const checkout = async () => {
+    setImageOut(appConfig.cam_out + '/capture');
     const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
     setRes2(res.data);
   };
@@ -71,7 +75,7 @@ const GuardViews: React.FC = () => {
               </div>
               <img
                 className="h-full aspect-square rounded-md"
-                src={appConfig.cam_in + '/capture'}
+                src={imageIn}
                 alt="imagein" />
             </div>
             <div className="col-span-2">
@@ -93,7 +97,7 @@ const GuardViews: React.FC = () => {
               </div>
               <img
                 className="h-full aspect-square rounded-md"
-                src={res2.imageIn}
+                src={res2?.imageIn}
                 alt="imagein" />
             </div>
             <div className="relative">
@@ -103,7 +107,7 @@ const GuardViews: React.FC = () => {
               {res?.timeOut ? (
                 <img
                   className="h-full aspect-square rounded-md"
-                  src={appConfig.cam_out + '/capture'}
+                  src={imageOut}
                   alt="imageout"
                 />
               ) : (
