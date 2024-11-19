@@ -7,16 +7,18 @@ import { off, onValue, ref } from 'firebase/database';
 import { database } from '@/firebase.ts';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog.tsx';
 import { appConfig } from '@/configs';
-import { ToggleGateInButton } from '@/views/guards/components/action.tsx';
+import { ToggleGateInButton, ToggleGateOutButton } from '@/views/guards/components/action.tsx';
+import { cardApi } from '@/api/cardApi.ts';
 
 
 const GuardViews: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [gateInCard, setGateInCard] = useState<string>();
-  const [gateOutCard, setGateOutCard] = useState<string>();
-  const [imageInUrl, setImageInUrl] = useState<string>('');
-  const [imageOutUrl, setImageOutUrl] = useState<string>('');
+  const [open2, setOpen2] = useState(false);
+  const [gateInCard, setGateInCard] = useState<string>('');
+  const [gateOutCard, setGateOutCard] = useState<string>('');
   const [res, setRes] = useState<any>();
+  const [res2, setRes2] = useState<any>();
+
   useEffect(() => {
     const connectorGateIn = ref(database, '/gates/gate_1/card_id');
     const connectorGateOut = ref(database, '/gates/gate_2/card_id');
@@ -34,9 +36,23 @@ const GuardViews: React.FC = () => {
     };
   }, []);
 
+  const checkin = async () => {
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
+    setRes(res.data);
+  };
+  const checkout = async () => {
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
+    setRes2(res.data);
+  };
+
   useEffect(() => {
     if (gateInCard) {
       setOpen(true);
+      checkin();
+    }
+    if (gateOutCard) {
+      setOpen2(true);
+      checkout();
     }
   }, [gateInCard, gateOutCard]);
 
@@ -55,24 +71,8 @@ const GuardViews: React.FC = () => {
               </div>
               <img
                 className="h-full aspect-square rounded-md"
-                src={appConfig.cam_in}
+                src={appConfig.cam_in + '/capture'}
                 alt="imagein" />
-            </div>
-            <div className="relative">
-              <div className="absolute text-sm z-10 bg-primary px-1.5 py-1 rounded-md text-primary-foreground">
-                Cổng ra
-              </div>
-              {res?.timeOut ? (
-                <img
-                  className="h-full aspect-square rounded-md"
-                  src={imageOutUrl}
-                  alt="imageout"
-                />
-              ) : (
-                <div className="h-full aspect-square rounded-md flex items-center justify-center">
-                  No image found
-                </div>
-              )}
             </div>
             <div className="col-span-2">
               <ToggleGateInButton />
@@ -93,7 +93,7 @@ const GuardViews: React.FC = () => {
               </div>
               <img
                 className="h-full aspect-square rounded-md"
-                src={imageInUrl}
+                src={res2.imageIn}
                 alt="imagein" />
             </div>
             <div className="relative">
@@ -103,7 +103,7 @@ const GuardViews: React.FC = () => {
               {res?.timeOut ? (
                 <img
                   className="h-full aspect-square rounded-md"
-                  src={imageOutUrl}
+                  src={appConfig.cam_out + '/capture'}
                   alt="imageout"
                 />
               ) : (
@@ -113,7 +113,7 @@ const GuardViews: React.FC = () => {
               )}
             </div>
             <div className="col-span-2">
-              <ToggleGateInButton />
+              <ToggleGateOutButton />
             </div>
           </div>
         </DialogContent>
