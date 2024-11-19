@@ -52,7 +52,7 @@ export default function CardTable() {
   });
   useEffect(() => {
     navigate({ search: queryString.stringify(paramObject) }, { replace: true });
-  }, [debouncedSearchTerm, sorting, columnFilters, pagination.pageIndex, pagination.pageSize]);
+  }, [debouncedSearchTerm, sorting, columnFilters, pagination.pageIndex, pagination.pageSize,paramObject]);
   const table = useReactTable({
     data: data ? data?.data : [],
     columns: cardColumns,

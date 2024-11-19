@@ -39,7 +39,7 @@ export default function CardTypeTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const paramObject: ParsedQuery = {
-    search: query,
+    search: debouncedSearchTerm,
     page: String(pagination?.pageIndex ? pagination?.pageIndex + 1 : 1),
     limit: String(pagination.pageSize),
     sortBy: sorting.length ? sorting[0].id : '',

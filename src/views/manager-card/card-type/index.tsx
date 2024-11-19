@@ -30,7 +30,7 @@ export default function CardTypePage() {
         </BreadcrumbList>
       </Breadcrumb>
       <Card className="rounded-lg flex-1 flex border-none  min-h-0">
-        <CardContent className="p-6 flex-1">
+        <CardContent className="p-6 flex-1 overflow-y-auto scroll-custom">
           <CardTypeTable />
         </CardContent>
       </Card>

@@ -79,6 +79,7 @@
 
     .scroll-custom::-webkit-scrollbar {
         width: 8px;
+        height: 5px;
         border-radius: 10px;
     }
 

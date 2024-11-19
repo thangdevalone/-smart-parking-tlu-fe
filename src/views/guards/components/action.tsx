@@ -3,9 +3,16 @@ import { LogIn, LogOut } from 'lucide-react';
 import { database } from '@/firebase.ts';
 import { ref, onValue, off, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+
+interface Gate {
+  status: boolean;
+  obstacle: boolean;
+  card_id: string;
+}
 
 export function ToggleGateInButton() {
-  const [gateIn, setGateIn] = useState<boolean>();
+  const [gateIn, setGateIn] = useState<Gate | undefined>();
 
   useEffect(() => {
     const connectorGateIn = ref(database, '/gates/gate_1');
@@ -21,12 +28,18 @@ export function ToggleGateInButton() {
 
   const toggleGateIn = async () => {
     if (gateIn !== undefined) {
-      const newStatus = !gateIn;
+      if (gateIn.obstacle && gateIn.status) {
+        toast.error('Cổng vào không thể đóng vì có vật cản!');
+        return;
+      }
+
+      const newStatus = !gateIn.status;
       try {
-        await set(ref(database, '/gates/gate_1'), newStatus);
-        setGateIn(newStatus);
+        await set(ref(database, '/gates/gate_1/status'), newStatus);
+        setGateIn({ ...gateIn, status: newStatus });
+        toast.success('Thao tác với cổng thành công!');
       } catch (error) {
-        console.error('Error updating gateIn status:', error);
+        toast.error('Error updating gateIn status:' + error);
       }
     }
   };
@@ -34,17 +47,17 @@ export function ToggleGateInButton() {
   return (
     <Button
       onClick={toggleGateIn}
-      className="h-16 px-8 w-full text-base bg-default-red hover:bg-default-red hover:opacity-90"
+      className="h-16 px-8 w-[200px] text-base bg-default-red hover:bg-default-red hover:opacity-90"
       icon={<LogIn className="w-4 h-4 mr-2" />}
     >
-      {gateIn ? 'Đóng cổng vào' : 'Mở cổng vào'}
+      {gateIn?.status ? 'Đóng cổng vào' : 'Mở cổng vào'}
     </Button>
   );
 }
 
 
 export function ToggleGateOutButton() {
-  const [gateOut, setGateOut] = useState<boolean>();
+  const [gateOut, setGateOut] = useState<Gate | undefined>();
 
   useEffect(() => {
     const connectorGateOut = ref(database, '/gates/gate_2');
@@ -60,12 +73,18 @@ export function ToggleGateOutButton() {
 
   const toggleGateOut = async () => {
     if (gateOut !== undefined) {
-      const newStatus = !gateOut;
+      if (gateOut.obstacle && gateOut.status) {
+        toast.error('Cổng ra không thể đóng vì có vật cản!');
+        return;
+      }
+
+      const newStatus = !gateOut.status;
       try {
-        await set(ref(database, '/gates/gate_2'), newStatus);
-        setGateOut(newStatus);
+        await set(ref(database, '/gates/gate_2/status'), newStatus);
+        setGateOut({ ...gateOut, status: newStatus });
+        toast.success('Thao tác với cổng thành công!');
       } catch (error) {
-        console.error('Error updating gateOut status:', error);
+        toast.error('Error updating gateOut status:' + error);
       }
     }
   };
@@ -73,12 +92,10 @@ export function ToggleGateOutButton() {
   return (
     <Button
       onClick={toggleGateOut}
-      className="h-16 px-8 w-full text-base bg-default-blue hover:bg-default-blue hover:opacity-90"
+      className="h-16 px-8  w-[200px] text-base bg-default-blue hover:bg-default-blue hover:opacity-90"
       icon={<LogOut className="w-4 h-4 mr-2" />}
     >
-      {gateOut ? 'Đóng cổng ra' : 'Mở cổng ra'}
+      {gateOut?.status ? 'Đóng cổng ra' : 'Mở cổng ra'}
     </Button>
   );
 }
-
-

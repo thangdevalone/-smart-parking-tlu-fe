@@ -1,12 +1,11 @@
 import { Card } from '@/components/ui/card.tsx';
 import { HandCoins, Split } from 'lucide-react';
 import { CurrencyFormatter } from '@/lib/currency-formater.ts';
-import { LineChartGuard } from '@/views/guards/components/charts';
 import { format } from 'date-fns';
 
 export default function StatisticGroup() {
   return (
-    <div className="space-y-4">
+    <div className="xl:grid xl:grid-cols-2 xl:gap-4 xl:p-4">
       <Card className="p-4">
         <div className="flex flex-row justify-between items-center">
           <p className="text-lg font-bold">Lưu lượng xe ra vào ({format(new Date(), 'MM/yyyy')})</p>
@@ -39,7 +38,6 @@ export default function StatisticGroup() {
                 Statistics
               </span>
       </Card>
-      <LineChartGuard />
     </div>
   );
 }
