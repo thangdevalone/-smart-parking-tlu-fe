@@ -50,11 +50,11 @@ const GuardViews: React.FC = () => {
   };
 
   useEffect(() => {
-    if (gateInCard) {
+    if (gateInCard?.length > 0) {
       setOpen(true);
       checkin();
     }
-    if (gateOutCard) {
+    if (gateOutCard?.length > 0) {
       setOpen2(true);
       checkout();
     }
