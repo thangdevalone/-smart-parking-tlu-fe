@@ -13,7 +13,7 @@ export const billApi = {
     return await axiosClient.post(url, data);
   },
   async getTransaction(params?: ParsedQuery) {
-    const url = `/payment/create-payment-user`;
+    const url = `/payment`;
     return await axiosClient.get<SuccessResponse<Transaction[]>>(url, { params });
   },
 };

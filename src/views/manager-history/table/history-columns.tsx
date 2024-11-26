@@ -65,17 +65,17 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('price') as any;
-      return <div>{bill ? CurrencyFormatter.toVND(bill.price) : 'N/A'}</div>;
+      return <div>{bill ? CurrencyFormatter.toVND(bill.price || '3000') : 'N/A'}</div>;
     },
   },
   {
-    accessorKey: 'ticketType',
+    accessorKey: 'price',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['ticketType']} />
     ),
     cell: ({ row }) => {
-      const bill = row.getValue('ticketType') as any;
-      return <div>{bill.price ? 'Vé ngày' : 'Vé tháng'}</div>;
+      const bill = row.getValue('price') as any;
+      return <div>{+bill? 'Vé ngày' : 'Vé tháng'}</div>;
     },
   },
 ];
