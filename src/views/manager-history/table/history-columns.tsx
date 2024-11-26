@@ -59,12 +59,12 @@ export const historyColumns: ColumnDef<History>[] = [
     cell: ({ row }) => <div>{format(new Date(row.getValue('timeOut')), 'dd/MM/yyyy HH:mm:ss')}</div>,
   },
   {
-    accessorKey: 'bill',
+    accessorKey: 'price',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['bill']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['price']} />
     ),
     cell: ({ row }) => {
-      const bill = row.getValue('bill') as any;
+      const bill = row.getValue('price') as any;
       return <div>{bill ? CurrencyFormatter.toVND(bill.price) : 'N/A'}</div>;
     },
   },
