@@ -12,11 +12,8 @@ import { DialogClose, DialogFooter } from '@/components/ui/dialog.tsx';
 import { cn } from '@/lib/utils.ts';
 import { Button, buttonVariants } from '@/components/ui/button.tsx';
 import { KeyDialogs } from '@/constants';
-import { CardType, DialogActionType, User } from '@/types';
-import {
-  SelectItem,
-} from '@/components/ui/select';
-import { userApi } from '@/api/userApi';
+import { CardType, DialogActionType } from '@/types';
+import { SelectItem } from '@/components/ui/select';
 
 const cardSchema = z.object({
   cardCode: z.string().min(1, {
@@ -27,9 +24,6 @@ const cardSchema = z.object({
   }),
   idCard: z.string().min(1, {
     message: 'Cần nhập mã thẻ',
-  }),
-  userId: z.string().min(1, {
-    message: 'Cần chọn sở hữu cho thẻ',
   }),
   cardStatus: z.enum(['active', 'inactive']).default('active'),
 });
@@ -44,20 +38,15 @@ export type CardValue = z.infer<typeof cardSchema>;
 export function CardForm() {
   const { closeDialog, dialogs } = useDialogStore();
   const queryClient = useQueryClient();
-  const [users, setUsers] = useState<User[] | []>([]);
   const [cardTypes, setCardTypes] = useState<CardType[] | []>([]);
 
-  const fetchUsers = async () => {
-    const [users, cardTypes] = await Promise.all([
-      userApi.getUsers(),
-      cardApi.getCardTypes(),
-    ]);
-    setUsers(users.data.data);
+  const fetchData = async () => {
+    const cardTypes = await cardApi.getCardTypes();
     setCardTypes(cardTypes.data.data);
   };
 
   useEffect(() => {
-    fetchUsers();
+    fetchData();
   }, []);
 
   const form = useForm<CardValue>({
@@ -75,7 +64,6 @@ export function CardForm() {
     if (isEdit) {
       const data = currentDialog.data;
       form.setValue('idCard', data?.idCard);
-      form.setValue('userId', data?.userId + '');
       form.setValue('cardType', data?.cardType.id + '');
       form.setValue('cardCode', data?.cardCode);
       form.setValue('cardStatus', data?.cardStatus);
@@ -123,13 +111,6 @@ export function CardForm() {
           placeholder="Nhập tên thẻ"
           require
         />
-        <SelectionField require label="Sở hữu" name="userId" placeholder="Select a user">
-          {users.map((user) => (
-            <SelectItem key={user.id} value={user.id + ''}>
-              {user.fullName}
-            </SelectItem>
-          ))}
-        </SelectionField>
         <SelectionField require label="Loại thẻ" name="cardType" placeholder="Select a card type">
           {cardTypes.map((cardType) => (
             <SelectItem key={cardType.id} value={cardType.id + ''}>

@@ -61,7 +61,7 @@ export const historyColumns: ColumnDef<History>[] = [
   {
     accessorKey: 'bill',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['price']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['bill']} />
     ),
     cell: ({ row }) => {
       const bill = row.getValue('bill') as any;
@@ -69,12 +69,12 @@ export const historyColumns: ColumnDef<History>[] = [
     },
   },
   {
-    accessorKey: 'bill',
+    accessorKey: 'ticketType',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['ticketType']} />
     ),
     cell: ({ row }) => {
-      const bill = row.getValue('bill') as any;
+      const bill = row.getValue('ticketType') as any;
       return <div>{bill.price ? 'Vé ngày' : 'Vé tháng'}</div>;
     },
   },

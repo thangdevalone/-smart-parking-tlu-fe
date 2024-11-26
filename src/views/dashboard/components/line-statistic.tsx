@@ -8,20 +8,20 @@ export default function LineStatistic() {
   >
     <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2 [&>div]:flex-1">
       <div>
-        <CardDescription>Resting HR</CardDescription>
+        <CardDescription>Tiền hôm nay</CardDescription>
         <CardTitle className="flex items-baseline gap-1 text-4xl tabular-nums">
-          62
+          6,2
           <span className="text-sm font-normal tracking-normal text-muted-foreground">
-                  bpm
+              Triệu
                 </span>
         </CardTitle>
       </div>
       <div>
-        <CardDescription>Variability</CardDescription>
+        <CardDescription>Cao nhất</CardDescription>
         <CardTitle className="flex items-baseline gap-1 text-4xl tabular-nums">
           35
           <span className="text-sm font-normal tracking-normal text-muted-foreground">
-                  ms
+                  Triệu
                 </span>
         </CardTitle>
       </div>

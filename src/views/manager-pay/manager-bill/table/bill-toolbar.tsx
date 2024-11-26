@@ -1,29 +1,49 @@
 import { Table } from '@tanstack/react-table';
-import { Input } from '@/components/ui/input.tsx';
 import { DataTableViewOptions } from '@/components/common/data-table/data-table-view-options.tsx';
-import {  SearchIcon } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog.tsx';
+import { KeyDialogs } from '@/constants';
+import { Button } from '@/components/ui/button.tsx';
+import { Plus } from 'lucide-react';
+import { useDialogStore } from '@/store/dialog-state-store.ts';
+import { BillForm } from '@/views/manager-pay/manager-bill/form/bill-form.tsx';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  query: string;
-  setQuery: (query: string) => void;
+
 }
 
 
 export function BillToolbar<TData>(props: DataTableToolbarProps<TData>) {
-  const { table, query, setQuery } = props;
-
+  const { table } = props;
+  const { dialogs, setDialogState } = useDialogStore();
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <div>
-          <Input
-            placeholder="Tìm theo loại vé"
-            startIcon={<SearchIcon className="w-4 h-4" />}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            className="w-[150px] lg:w-[250px]"
-          />
+          <Dialog
+            onOpenChange={(open) => setDialogState(KeyDialogs.bill, { open })}
+            open={dialogs[KeyDialogs.bill]?.open}
+          >
+            <DialogTrigger asChild>
+              <Button icon={<Plus className="w-4 h-4 mr-2" />}>
+                Thêm mới
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Thêm hoá đơn</DialogTitle>
+                <DialogDescription>Điền giá trị vào mẫu để tạo hoá đơn</DialogDescription>
+              </DialogHeader>
+              <BillForm />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 

@@ -94,7 +94,7 @@ export const Payment = () => {
           </DialogContent>
         </Dialog>
         <div
-          className={'dark:bg-gradient-secondary-light border overflow-hidden shadow dark:border-secondary-alpha20 rounded-[24px] h-32 p-4 relative flex flex-row gap-4'}>
+          className={'dark:bg-gradient-secondary-light  border overflow-hidden shadow dark:border-secondary-alpha20 rounded-[24px] h-32 p-4 relative flex flex-row gap-4'}>
           <img
             src={LoopPattern} alt={'dots'}
             className={'h-44 absolute z-0 -top-4 -left-6 self-start'}

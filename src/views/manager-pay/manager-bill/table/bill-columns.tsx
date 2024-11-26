@@ -16,14 +16,14 @@ export const billColumns: ColumnDef<Bill>[] = [
   {
     accessorKey: 'startDate',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['startDate']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['billStartDate']} />
     ),
     cell: ({ row }) => <div>{format(new Date(row.getValue('startDate')), 'dd/MM/yyyy HH:mm:ss')}</div>,
   },
   {
     accessorKey: 'endDate',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['endDate']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['billEndDate']} />
     ),
     cell: ({ row }) => <div>{format(new Date(row.getValue('endDate')), 'dd/MM/yyyy HH:mm:ss')}</div>,
   },
@@ -40,7 +40,7 @@ export const billColumns: ColumnDef<Bill>[] = [
   {
     accessorKey: 'billStatus',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['Status']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['billStatus']} />
     ),
     cell: ({ row }) => <div>{row.getValue('billStatus') === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán'}</div>,
   },

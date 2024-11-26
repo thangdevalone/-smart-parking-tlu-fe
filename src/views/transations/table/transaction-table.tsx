@@ -12,19 +12,19 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
+
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table.tsx';
 import { DataTablePagination } from '@/components/common/data-table/data-table-pagination.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString, { ParsedQuery } from 'query-string';
-import { useBillFetcher } from '@/hooks';
+import { useTransactionFetcher } from '@/hooks';
 import { TableHeaderComp } from '@/components/common/data-table';
 import { LoaderCircle } from 'lucide-react';
 import { userColumns } from '@/views/manager-system/user/table/user-columns.tsx';
-import { billColumns } from './bill-columns';
-import { BillToolbar } from './bill-toolbar';
+import { transactionColumns } from '@/views/transations/table/transaction-columns.tsx';
 
 
-export function BillTable() {
+export function TransactionTable() {
   const location = useLocation();
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -46,7 +46,7 @@ export function BillTable() {
     sortType: !sorting[0]?.desc ? 'desc' : 'asc',
     filters: String(columnFilters),
   };
-  const { data, isFetching } = useBillFetcher({
+  const { data, isFetching } = useTransactionFetcher({
     options: { refetchOnWindowFocus: false, enabled: !!location.search, retry: false },
     queryParam: param,
   });
@@ -55,7 +55,7 @@ export function BillTable() {
   }, [sorting, columnFilters, pagination.pageIndex, pagination.pageSize]);
   const table = useReactTable({
     data: data ? data?.data : [],
-    columns: billColumns,
+    columns: transactionColumns,
     state: {
       sorting,
       columnVisibility,
@@ -83,7 +83,6 @@ export function BillTable() {
 
   return (
     <div className="gap-4 h-full flex flex-col">
-      <BillToolbar table={table} />
       <div className="rounded-md flex relative  flex-col border min-h-0 flex-1">
         <Table>
           <TableHeaderComp className="sticky top-0 z-[20] bg-background" table={table} />

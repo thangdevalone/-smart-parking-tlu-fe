@@ -28,6 +28,7 @@ import useAuthStore from '@/store/auth-store.ts';
 import { RoleInApp } from '@/types';
 import BillPage from '@/views/manager-pay/manager-bill';
 import { Payment } from '@/views/manager-pay/payment';
+import TransactionPage from '@/views/transations';
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ function App() {
                       <Route path="history" element={<HistoryPage />} />
                       <Route path="payment/bills" element={<BillPage />} />
                       <Route path="payment/pay" element={<Payment />} />
+                      <Route path="transaction" element={<TransactionPage />} />
                       <Route path="settings" element={<SettingsPage />}>
                         <Route index element={<Navigate to="profile" />} />
                         <Route path="profile" element={<ManagerProfile />} />

@@ -7,11 +7,11 @@ export default function BarStatistic() {
     className="lg:max-w-md" x-chunk="charts-01-chunk-0"
   >
     <CardHeader className="space-y-0 pb-2">
-      <CardDescription>Today</CardDescription>
+      <CardDescription>Hôm nay</CardDescription>
       <CardTitle className="text-4xl tabular-nums">
         12,584{' '}
         <span className="font-sans text-sm font-normal tracking-normal text-muted-foreground">
-                steps
+                Xe
               </span>
       </CardTitle>
     </CardHeader>
@@ -103,7 +103,7 @@ export default function BarStatistic() {
           >
             <Label
               position="insideBottomLeft"
-              value="Average Steps"
+              value="Trung bình xe"
               offset={10}
               fill="hsl(var(--foreground))"
             />
@@ -121,14 +121,10 @@ export default function BarStatistic() {
     </CardContent>
     <CardFooter className="flex-col items-start gap-1">
       <CardDescription>
-        Over the past 7 days, you have walked{' '}
-        <span className="font-medium text-foreground">53,305</span> steps.
+        Trong 7 ngày qua, tổng xe đã vào trong bãi là{' '}
+        <span className="font-medium text-foreground">53,305</span> xe.
       </CardDescription>
-      <CardDescription>
-        You need{' '}
-        <span className="font-medium text-foreground">12,584</span> more
-        steps to reach your goal.
-      </CardDescription>
+     
     </CardFooter>
   </Card>);
 }

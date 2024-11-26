@@ -8,11 +8,19 @@ export const ConvertColumnIDs: { [key: string]: string } = {
   'status': 'Trạng thái',
   'startDate': 'Thời gian vào',
   'endDate': 'Thời gian ra',
+  'billStartDate': 'Thời gian mua',
+  'billEndDate': 'Thời gian hết hạn',
   'price': 'Giá tiền',
+  'bill': 'Giá tiền',
   'idCard': 'Mã định danh thẻ',
   'imageIn': 'Ảnh vào',
   'imageOut': 'Ảnh ra',
   'ticketType': 'Loại vé',
+  'billStatus': 'Trạng thái hoá đơn',
+  'user': 'Người dùng',
+  'amount': 'Tiền thanh toán',
+  'bankCode': 'Số tài khoản',
+  'payDate': 'Thời gian thanh toán'
 };
 
 
@@ -44,5 +52,6 @@ export const KeyDialogs = {
   role: 'role',
   resetPassowrdUser: 'reset-password-user',
   paymentVNpay: 'paymentvnpay',
+  bill: 'bill',
 };
 export type IKeyDialog = typeof KeyDialogs[keyof typeof KeyDialogs];

@@ -7,9 +7,9 @@ export default function ProgressStatistic() {
     className="max-w-xs" x-chunk="charts-01-chunk-2"
   >
     <CardHeader>
-      <CardTitle>Progress</CardTitle>
+      <CardTitle>Thống kê năm</CardTitle>
       <CardDescription>
-        You're average more steps a day this year than last year.
+        Thống kê lưu lượng xe hằng năm
       </CardDescription>
     </CardHeader>
     <CardContent className="grid gap-4">
@@ -17,7 +17,7 @@ export default function ProgressStatistic() {
         <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
           12,453
           <span className="text-sm font-normal text-muted-foreground">
-                  steps/day
+                  xe/ngày
                 </span>
         </div>
         <ChartContainer
@@ -68,7 +68,7 @@ export default function ProgressStatistic() {
         <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
           10,103
           <span className="text-sm font-normal text-muted-foreground">
-                  steps/day
+                    xe/ngày
                 </span>
         </div>
         <ChartContainer

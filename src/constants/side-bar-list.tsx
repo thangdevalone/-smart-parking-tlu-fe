@@ -1,4 +1,4 @@
-import { Bookmark, HandCoins, IdCard, LayoutGrid, LucideIcon, MapPin, Users } from 'lucide-react';
+import { BadgeCent, Bookmark, HandCoins, IdCard, LayoutGrid, LucideIcon, MapPin, Users } from 'lucide-react';
 import { RoleInApp } from '@/types';
 
 type Submenu = {
@@ -106,6 +106,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
               href: `/${role}/payment/pay`,
               label: 'Thanh toán',
               active: pathname === `/${role}/payment/pay`,
+              role: [RoleInApp.USER],
             },
             {
               href: `/${role}/payment/bills`,
@@ -113,6 +114,14 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
               active: pathname === `/${role}/payment/bills`,
             },
           ],
+        },
+        {
+          href: `/${role}/transaction`,
+          label: 'Lịch sử giao dịch',
+          active: pathname.includes('/transaction'),
+          icon: BadgeCent,
+          role: [RoleInApp.ADMIN],
+          submenus: [],
         },
       ],
     },
