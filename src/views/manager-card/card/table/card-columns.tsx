@@ -41,6 +41,13 @@ const cardColumns: ColumnDef<Card>[] = [
 
   },
   {
+    accessorKey: 'user',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['user']} />
+    ),
+    cell: ({ row }) => <div>{row.original?.user?.fullName || '-'}</div>,
+  },
+  {
     accessorKey: 'cardCode',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardCode']} />
@@ -72,13 +79,7 @@ const cardColumns: ColumnDef<Card>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypePrice']} />,
     cell: ({ row }) => <div>{CurrencyFormatter.toVND(Number(row.original.cardType.cardTypePrice))}</div>,
   },
-  {
-    accessorKey: 'user',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['user']} />
-    ),
-    cell: ({ row }) => <div>{row.original?.user?.fullName || '-'}</div>,
-  },
+
   {
     id: 'actions',
     cell: ({ row }) => <CardHandler row={row} />,
