@@ -3,7 +3,6 @@ import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { Card } from '@/types/card.ts';
 import { ConvertColumnIDs } from '@/constants';
-import { format } from 'date-fns';
 import { CardHandler } from './card-handler';
 import { renderStatus } from '@/components/shared/reuse.tsx';
 import { CurrencyFormatter } from '@/lib/currency-formater.ts';
@@ -74,18 +73,11 @@ const cardColumns: ColumnDef<Card>[] = [
     cell: ({ row }) => <div>{CurrencyFormatter.toVND(Number(row.original.cardType.cardTypePrice))}</div>,
   },
   {
-    accessorKey: 'createdAt',
+    accessorKey: 'user',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['createdAt']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['user']} />
     ),
-    cell: ({ row }) => <div>{format(row.getValue('createdAt'), 'dd/MM/yyyy hh:mm:ss')}</div>,
-  },
-  {
-    accessorKey: 'updatedAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['updatedAt']} />
-    ),
-    cell: ({ row }) => <div>{format(row.getValue('updatedAt'), 'dd/MM/yyyy hh:mm:ss')}</div>,
+    cell: ({ row }) => <div>{row.original?.user?.fullName || '-'}</div>,
   },
   {
     id: 'actions',
