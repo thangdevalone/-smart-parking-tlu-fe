@@ -65,7 +65,7 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('price') as any;
-      return <div>{bill ? CurrencyFormatter.toVND(bill.price || '3000') : 'N/A'}</div>;
+      return <div>{bill ? CurrencyFormatter.toVND(bill.price || 0) : 'N/A'}</div>;
     },
   },
   {
@@ -75,7 +75,7 @@ export const historyColumns: ColumnDef<History>[] = [
     ),
     cell: ({ row }) => {
       const bill = row.getValue('price') as any;
-      return <div>{+bill? 'Vé ngày' : 'Vé tháng'}</div>;
+      return <div>{+bill ? 'Vé ngày' : 'Vé tháng'}</div>;
     },
   },
 ];
