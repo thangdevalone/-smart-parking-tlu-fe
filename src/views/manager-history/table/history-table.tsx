@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   ColumnFiltersState,
   flexRender,
@@ -17,7 +17,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table.tsx
 import { DataTablePagination } from '@/components/common/data-table/data-table-pagination.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString, { ParsedQuery } from 'query-string';
-import { useDebounce, useHistoryFetcher } from '@/hooks';
+import { useHistoryFetcher } from '@/hooks';
 import { TableHeaderComp } from '@/components/common/data-table';
 import { LoaderCircle } from 'lucide-react';
 import { userColumns } from '@/views/manager-system/user/table/user-columns.tsx';
@@ -38,12 +38,11 @@ export function HistoryTable() {
     pageSize: Number(param?.limit || 10),
   });
   const navigate = useNavigate();
-  const [query, setQuery] = useState('');
-  const debouncedSearchTerm = useDebounce(query, 500);
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const paramObject: ParsedQuery = {
-    search: query,
+
     page: String(pagination?.pageIndex ? pagination?.pageIndex + 1 : 1),
     limit: String(pagination.pageSize),
     sortBy: sorting.length ? sorting[0].id : '',
@@ -56,7 +55,7 @@ export function HistoryTable() {
   });
   useEffect(() => {
     navigate({ search: queryString.stringify(paramObject) }, { replace: true });
-  }, [debouncedSearchTerm, sorting, columnFilters, pagination.pageIndex, pagination.pageSize]);
+  }, [sorting, columnFilters, pagination.pageIndex, pagination.pageSize]);
   const table = useReactTable({
     data: data ? data?.data : [],
     columns: historyColumns,
@@ -87,7 +86,7 @@ export function HistoryTable() {
 
   return (
     <div className="gap-4 h-full flex flex-col">
-      <HistoryToolbar table={table} query={query} setQuery={setQuery} />
+      <HistoryToolbar table={table} />
       <div className="rounded-md flex relative  flex-col border min-h-0 flex-1">
         <Table>
           <TableHeaderComp className="sticky top-0 z-[20] bg-background" table={table} />

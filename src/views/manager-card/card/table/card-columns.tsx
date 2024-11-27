@@ -64,12 +64,12 @@ const cardColumns: ColumnDef<Card>[] = [
     cell: ({ row }) => <div>{row.getValue('idCard')}</div>,
   },
   {
-    accessorKey: 'cardType',
+    accessorKey: 'cardType.cardTypeName',
     header: ({ column }) => <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypeName']} />,
     cell: ({ row }) => <div>{row.original.cardType.cardTypeName}</div>,
   },
   {
-    accessorKey: 'cardType',
+    accessorKey: 'cardType.cardTypePrice',
     header: ({ column }) => <DataTableColumnHeader column={column} title={ConvertColumnIDs['cardTypePrice']} />,
     cell: ({ row }) => <div>{CurrencyFormatter.toVND(Number(row.original.cardType.cardTypePrice))}</div>,
   },

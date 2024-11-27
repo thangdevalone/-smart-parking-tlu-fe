@@ -1,4 +1,3 @@
-import { Card } from '@/types/card.ts';
 import { User } from '@/types/auth.ts';
 
 export interface Bill {
@@ -6,9 +5,10 @@ export interface Bill {
   startDate: string;
   endDate: string;
   price: number;
-  billStatus: string;
-  card: Card;
-  histories: History[];
+  user: {
+    id: number;
+    fullName: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

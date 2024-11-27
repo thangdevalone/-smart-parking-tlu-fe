@@ -16,7 +16,7 @@ export default function HistoryGroup() {
     (async () => {
       try {
         const { data } = await historyApi.getHistories({ page: '1', limit: '100' } as ParsedQuery);
-        setData(data as unknown as History[]);
+        setData(data.data as unknown as History[]);
       } catch (e) {
         console.log(e);
       } finally {

@@ -35,6 +35,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => <div>{row.getValue('bankCode') ?? '-'}</div>,
   },
   {
+    accessorKey: 'status',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['status']} />
+    ),
+    cell: ({ row }) => <div>{row.original.status}</div>,
+  },
+  {
     accessorKey: 'payDate',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['payDate']} />

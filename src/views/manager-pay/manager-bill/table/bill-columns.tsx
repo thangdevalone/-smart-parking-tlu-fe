@@ -38,10 +38,10 @@ export const billColumns: ColumnDef<Bill>[] = [
     },
   },
   {
-    accessorKey: 'billStatus',
+    accessorKey: 'user',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title={ConvertColumnIDs['billStatus']} />
+      <DataTableColumnHeader column={column} title={ConvertColumnIDs['user']} />
     ),
-    cell: ({ row }) => <div>{row.getValue('billStatus') === 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán'}</div>,
+    cell: ({ row }) => <div>{row.original.user.fullName}</div>,
   },
 ];
