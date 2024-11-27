@@ -64,8 +64,8 @@ export const historyColumns: ColumnDef<History>[] = [
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['price']} />
     ),
     cell: ({ row }) => {
-      const bill = row.getValue('price') as any;
-      return <div>{bill ? CurrencyFormatter.toVND(bill.price || 0) : 'N/A'}</div>;
+      const bill = Number(row.getValue('price')) as any;
+      return <div>{bill ? CurrencyFormatter.toVND(bill || 0) : '0đ'}</div>;
     },
   },
   {
