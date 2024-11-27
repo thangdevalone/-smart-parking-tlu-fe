@@ -120,7 +120,7 @@ export function SideBarList(pathname: string, role: Exclude<RoleInApp, RoleInApp
           label: 'Lịch sử giao dịch',
           active: pathname.includes('/transaction'),
           icon: BadgeCent,
-          role: [RoleInApp.ADMIN],
+          role: [RoleInApp.ADMIN, RoleInApp.USER],
           submenus: [],
         },
       ],

@@ -34,6 +34,7 @@ const queryClient = new QueryClient();
 
 const AdminRoutes = () => (
   <>
+    <Route path="dashboard" element={<Dashboard />} />
     <Route path="users" element={<UserPage />}>
       <Route index element={<UserTable />} />
       <Route path="form" element={<UserForm />} />
@@ -63,8 +64,7 @@ function App() {
                     </>
                   ) : (
                     <>
-                      <Route index element={<Navigate to="dashboard" />} />
-                      <Route path="dashboard" element={<Dashboard />} />
+                      <Route index element={<Navigate to={roleName === RoleInApp.USER ? 'cards' : 'dashboard'} />} />
                       <Route element={<AdminProtect />}>
                         {AdminRoutes()}
                       </Route>
