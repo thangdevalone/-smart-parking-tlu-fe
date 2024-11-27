@@ -20,7 +20,7 @@ export const ConvertColumnIDs: { [key: string]: string } = {
   'user': 'Người dùng',
   'amount': 'Tiền thanh toán',
   'bankCode': 'Số tài khoản',
-  'payDate': 'Thời gian thanh toán'
+  'payDate': 'Ngày tạo đơn'
 };
 
 
