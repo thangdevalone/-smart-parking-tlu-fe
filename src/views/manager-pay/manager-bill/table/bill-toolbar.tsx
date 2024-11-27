@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button.tsx';
 import { Plus } from 'lucide-react';
 import { useDialogStore } from '@/store/dialog-state-store.ts';
 import { BillForm } from '@/views/manager-pay/manager-bill/form/bill-form.tsx';
+import useAuthStore from '@/store/auth-store.ts';
+import { RoleInApp } from '@/types';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -23,11 +25,12 @@ interface DataTableToolbarProps<TData> {
 export function BillToolbar<TData>(props: DataTableToolbarProps<TData>) {
   const { table } = props;
   const { dialogs, setDialogState } = useDialogStore();
+  const { user } = useAuthStore();
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <div>
-          <Dialog
+          {user?.role.name === RoleInApp.ADMIN && <Dialog
             onOpenChange={(open) => setDialogState(KeyDialogs.bill, { open })}
             open={dialogs[KeyDialogs.bill]?.open}
           >
@@ -43,7 +46,7 @@ export function BillToolbar<TData>(props: DataTableToolbarProps<TData>) {
               </DialogHeader>
               <BillForm />
             </DialogContent>
-          </Dialog>
+          </Dialog>}
         </div>
       </div>
 
