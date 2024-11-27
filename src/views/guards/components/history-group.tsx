@@ -32,7 +32,7 @@ export default function HistoryGroup() {
   });
   return (
     <>
-      <div className=" flex relative h-full flex-col border-b min-h-0 flex-1">
+      <div className=" flex relative h-full flex-col border-b min-h-0 flex-1 max-h-[500px]">
         <Table>
           <TableHeaderComp className="sticky top-0 z-[20] bg-background" table={table} />
           {!isFetching && <TableBody>
