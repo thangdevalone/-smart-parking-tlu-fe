@@ -15,7 +15,6 @@ import UserPage from '@/views/manager-system/user';
 import CardTypePage from '@/views/manager-card/card-type';
 import UserForm from '@/views/manager-system/user/form/user-form-page.tsx';
 import { UserTable } from '@/views/manager-system/user/table/user-table.tsx';
-import RolePage from './views/manager-system/role';
 import HistoryPage from './views/manager-history';
 import SettingsPage from './views/settings';
 import { ManagerProfile } from './views/settings/manager-profile';
@@ -29,6 +28,8 @@ import { RoleInApp } from '@/types';
 import BillPage from '@/views/manager-pay/manager-bill';
 import { Payment } from '@/views/manager-pay/payment';
 import TransactionPage from '@/views/transations';
+import CarPositionPage from '@/views/car=position';
+import RolePage from '@/views/manager-system/role';
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const AdminRoutes = () => (
       <Route index element={<UserTable />} />
       <Route path="form" element={<UserForm />} />
     </Route>
+    <Route path="car-park" element={<CarPositionPage />} />
     <Route path="roles" element={<RolePage />} />
     <Route path="card-type" element={<CardTypePage />} />
   </>

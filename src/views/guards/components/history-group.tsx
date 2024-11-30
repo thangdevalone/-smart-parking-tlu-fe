@@ -15,7 +15,7 @@ export default function HistoryGroup() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await historyApi.getHistories({ page: '1', limit: '100' } as ParsedQuery);
+        const { data } = await historyApi.getHistories({ page: '1', limit: '500' } as ParsedQuery);
         setData(data.data as unknown as History[]);
       } catch (e) {
         console.log(e);
