@@ -7,6 +7,7 @@ import LineStatistic from '@/views/dashboard/components/line-statistic.tsx';
 import ProgressStatistic from '@/views/dashboard/components/progress-statistic.tsx';
 
 export function Charts() {
+
   return (
     <div
       className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">

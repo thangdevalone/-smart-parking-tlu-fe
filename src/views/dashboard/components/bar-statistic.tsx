@@ -1,15 +1,29 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.tsx';
 import { Bar, BarChart, Label, Rectangle, ReferenceLine, XAxis } from 'recharts';
+import { useEffect, useState } from 'react';
+import { analyticsApi } from '@/api/analytics.ts';
 
 export default function BarStatistic() {
-  return (<Card
+  const [data, setData] = useState<any>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await analyticsApi.weekly();
+        setData(res.data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+  console.log(data);
+  return (data && <Card
     className="lg:max-w-md" x-chunk="charts-01-chunk-0"
   >
     <CardHeader className="space-y-0 pb-2">
       <CardDescription>Hôm nay</CardDescription>
       <CardTitle className="text-4xl tabular-nums">
-        12,584{' '}
+        {data.today}{' '}
         <span className="font-sans text-sm font-normal tracking-normal text-muted-foreground">
                 Xe
               </span>
@@ -30,39 +44,10 @@ export default function BarStatistic() {
             left: -4,
             right: -4,
           }}
-          data={[
-            {
-              date: '2024-01-01',
-              steps: 2000,
-            },
-            {
-              date: '2024-01-02',
-              steps: 2100,
-            },
-            {
-              date: '2024-01-03',
-              steps: 2200,
-            },
-            {
-              date: '2024-01-04',
-              steps: 1300,
-            },
-            {
-              date: '2024-01-05',
-              steps: 1400,
-            },
-            {
-              date: '2024-01-06',
-              steps: 2500,
-            },
-            {
-              date: '2024-01-07',
-              steps: 1600,
-            },
-          ]}
+          data={data.data}
         >
           <Bar
-            dataKey="steps"
+            dataKey="value"
             fill="var(--color-steps)"
             radius={5}
             fillOpacity={0.6}
@@ -109,7 +94,7 @@ export default function BarStatistic() {
             />
             <Label
               position="insideTopLeft"
-              value="12,343"
+              value={data.average}
               className="text-lg"
               fill="hsl(var(--foreground))"
               offset={10}
@@ -122,9 +107,9 @@ export default function BarStatistic() {
     <CardFooter className="flex-col items-start gap-1">
       <CardDescription>
         Trong 7 ngày qua, tổng xe đã vào trong bãi là{' '}
-        <span className="font-medium text-foreground">53,305</span> xe.
+        <span className="font-medium text-foreground">{data.total}</span> xe.
       </CardDescription>
-     
+
     </CardFooter>
   </Card>);
 }

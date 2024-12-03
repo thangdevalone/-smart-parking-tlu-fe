@@ -1,27 +1,40 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart.tsx';
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
+import { useEffect, useState } from 'react';
+import { analyticsApi } from '@/api/analytics.ts';
 
 export default function LineStatistic() {
-  return (<Card
+  const [data, setData] = useState<any>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await analyticsApi.monthlyRevenue();
+        setData(res.data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+  return (data && <Card
     className="flex flex-col lg:max-w-md" x-chunk="charts-01-chunk-1"
   >
     <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2 [&>div]:flex-1">
       <div>
         <CardDescription>Tiền hôm nay</CardDescription>
         <CardTitle className="flex items-baseline gap-1 text-4xl tabular-nums">
-          6,2
+          {data.total}
           <span className="text-sm font-normal tracking-normal text-muted-foreground">
-              Triệu
+              VND
                 </span>
         </CardTitle>
       </div>
       <div>
         <CardDescription>Cao nhất</CardDescription>
         <CardTitle className="flex items-baseline gap-1 text-4xl tabular-nums">
-          35
+          {data.maxValue}
           <span className="text-sm font-normal tracking-normal text-muted-foreground">
-                  Triệu
+               VND
                 </span>
         </CardTitle>
       </div>
@@ -43,36 +56,7 @@ export default function LineStatistic() {
             right: 14,
             top: 10,
           }}
-          data={[
-            {
-              date: '2024-01-01',
-              resting: 62,
-            },
-            {
-              date: '2024-01-02',
-              resting: 72,
-            },
-            {
-              date: '2024-01-03',
-              resting: 35,
-            },
-            {
-              date: '2024-01-04',
-              resting: 62,
-            },
-            {
-              date: '2024-01-05',
-              resting: 52,
-            },
-            {
-              date: '2024-01-06',
-              resting: 62,
-            },
-            {
-              date: '2024-01-07',
-              resting: 70,
-            },
-          ]}
+          data={data.data}
         >
           <CartesianGrid
             strokeDasharray="4 4"

@@ -15,5 +15,4 @@ export const authApi = {
     const url = 'auth/forgot-password-user';
     return axiosClient.post<SuccessResponse<any>>(url);
   },
-  forgotPassword() { },
 };

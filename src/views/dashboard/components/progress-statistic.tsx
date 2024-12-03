@@ -1,15 +1,29 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.tsx';
 import { ChartContainer } from '@/components/ui/chart.tsx';
 import { Bar, BarChart, LabelList, XAxis, YAxis } from 'recharts';
+import { useEffect, useState } from 'react';
+import { analyticsApi } from '@/api/analytics.ts';
 
 export default function ProgressStatistic() {
+  const [data, setData] = useState<any>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await analyticsApi.compareMonthly();
+        setData(res.data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
+
   return (<Card
     className="max-w-xs" x-chunk="charts-01-chunk-2"
   >
     <CardHeader>
       <CardTitle>Thống kê năm</CardTitle>
       <CardDescription>
-        Thống kê lưu lượng xe hằng năm
+        Thống kê lưu lượng xe hằng tháng
       </CardDescription>
     </CardHeader>
     <CardContent className="grid gap-4">

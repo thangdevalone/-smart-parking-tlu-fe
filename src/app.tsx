@@ -28,8 +28,8 @@ import { RoleInApp } from '@/types';
 import BillPage from '@/views/manager-pay/manager-bill';
 import { Payment } from '@/views/manager-pay/payment';
 import TransactionPage from '@/views/transations';
-import CarPositionPage from '@/views/car=position';
 import RolePage from '@/views/manager-system/role';
+import CarPositionPage from '@/views/car-position';
 
 const queryClient = new QueryClient();
 
