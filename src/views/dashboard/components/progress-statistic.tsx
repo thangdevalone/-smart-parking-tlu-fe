@@ -17,7 +17,7 @@ export default function ProgressStatistic() {
     })();
   }, []);
 
-  return (<Card
+  return (data && <Card
     className="max-w-xs" x-chunk="charts-01-chunk-2"
   >
     <CardHeader>
@@ -29,7 +29,7 @@ export default function ProgressStatistic() {
     <CardContent className="grid gap-4">
       <div className="grid auto-rows-min gap-2">
         <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
-          12,453
+          {data.thisMonth.total}
           <span className="text-sm font-normal text-muted-foreground">
                   xe/ngày
                 </span>
@@ -54,8 +54,8 @@ export default function ProgressStatistic() {
             }}
             data={[
               {
-                date: '2024',
-                steps: 12435,
+                date: 'This month',
+                steps: data.thisMonth.total,
               },
             ]}
           >
@@ -80,7 +80,7 @@ export default function ProgressStatistic() {
       </div>
       <div className="grid auto-rows-min gap-2">
         <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
-          10,103
+          {data.thisMonth.total}
           <span className="text-sm font-normal text-muted-foreground">
                     xe/ngày
                 </span>
@@ -105,8 +105,8 @@ export default function ProgressStatistic() {
             }}
             data={[
               {
-                date: '2023',
-                steps: 10103,
+                date: 'Last month',
+                steps: data.thisMonth.total,
               },
             ]}
           >

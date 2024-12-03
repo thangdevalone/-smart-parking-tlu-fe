@@ -10,6 +10,10 @@ export const analyticsApi = {
     return axiosClient.get(url);
   },
   compareMonthly() {
+    const url = 'analytics/compare-monthly';
+    return axiosClient.get(url);
+  },
+  lastSevenDays() {
     const url = 'analytics/last-seven-days';
     return axiosClient.get(url);
   },

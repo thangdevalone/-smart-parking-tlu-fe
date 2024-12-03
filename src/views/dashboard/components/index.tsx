@@ -5,9 +5,24 @@ import { Separator } from '@/components/ui/separator';
 import BarStatistic from '@/views/dashboard/components/bar-statistic.tsx';
 import LineStatistic from '@/views/dashboard/components/line-statistic.tsx';
 import ProgressStatistic from '@/views/dashboard/components/progress-statistic.tsx';
+import { useEffect, useState } from 'react';
+import { analyticsApi } from '@/api/analytics.ts';
 
 export function Charts() {
-
+  const [data, setData] = useState<any>();
+  const [data2, setData2] = useState<any>();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await analyticsApi.lastSevenDays();
+        const res2 = await analyticsApi.inOut();
+        setData(res.data.data);
+        setData2(res2.data.data);
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
   return (
     <div
       className="chart-wrapper mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">
@@ -17,18 +32,18 @@ export function Charts() {
       </div>
       <div className="grid grid-cols-3 lg:grid-cols-1 w-full flex-1 gap-6 lg:max-w-[20rem]">
         <ProgressStatistic />
-        <Card
+        {data && <Card
           className="max-w-xs" x-chunk="charts-01-chunk-3"
         >
           <CardHeader className="p-4 pb-0">
             <CardTitle>Lưu lượng xe vào</CardTitle>
             <CardDescription>
-              Trong vòng 7 ngày qua bãi đỗ xe đã có lưu lượng khoảng 120 xe mỗi ngày
+              Trong vòng 7 ngày qua bãi đỗ xe đã có lưu lượng khoảng {Math.floor(data.value) || 1} xe mỗi ngày
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-row items-baseline gap-4 p-4 pt-0">
             <div className="flex items-baseline gap-1 text-3xl font-bold tabular-nums leading-none">
-              120
+              {Math.floor(data.value) || 1}
               <span className="text-sm font-normal text-muted-foreground">
                 xe/ngày
               </span>
@@ -36,7 +51,7 @@ export function Charts() {
             <ChartContainer
               config={{
                 steps: {
-                  label: 'Steps',
+                  label: 'Value',
                   color: 'hsl(var(--chart-1))',
                 },
               }}
@@ -50,39 +65,10 @@ export function Charts() {
                   top: 0,
                   bottom: 0,
                 }}
-                data={[
-                  {
-                    date: '2024-01-01',
-                    steps: 2000,
-                  },
-                  {
-                    date: '2024-01-02',
-                    steps: 2100,
-                  },
-                  {
-                    date: '2024-01-03',
-                    steps: 2200,
-                  },
-                  {
-                    date: '2024-01-04',
-                    steps: 1300,
-                  },
-                  {
-                    date: '2024-01-05',
-                    steps: 1400,
-                  },
-                  {
-                    date: '2024-01-06',
-                    steps: 2500,
-                  },
-                  {
-                    date: '2024-01-07',
-                    steps: 1600,
-                  },
-                ]}
+                data={data.data}
               >
                 <Bar
-                  dataKey="steps"
+                  dataKey="value"
                   fill="var(--color-steps)"
                   radius={2}
                   fillOpacity={0.2}
@@ -99,8 +85,8 @@ export function Charts() {
               </BarChart>
             </ChartContainer>
           </CardContent>
-        </Card>
-        <Card
+        </Card>}
+        {data2 && <Card
           className="max-w-xs" x-chunk="charts-01-chunk-4"
         >
           <CardContent className="flex gap-4 p-4 pb-2">
@@ -128,14 +114,14 @@ export function Charts() {
                 data={[
                   {
                     activity: 'Xe vào',
-                    value: (8 / 12) * 100,
-                    label: '100 xe',
+                    value: (Number(data2.in) / Number(data2.in + data2.out)) * 100,
+                    label: `${data2.in} xe`,
                     fill: 'var(--color-stand)',
                   },
                   {
                     activity: 'Xe ra',
-                    value: (46 / 60) * 100,
-                    label: '34 xe',
+                    value: (Number(data2.out) / Number(data2.in + data2.out)) * 100,
+                    label: `${data2.out} xe`,
                     fill: 'var(--color-exercise)',
                   },
 
@@ -170,7 +156,7 @@ export function Charts() {
               <div className="grid flex-1 auto-rows-min gap-0.5">
                 <div className="text-xs text-muted-foreground">Xe vào</div>
                 <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
-                  100
+                  {Number(data2.in)}
                   <span className="text-sm font-normal text-muted-foreground">
                     Xe
                   </span>
@@ -180,7 +166,7 @@ export function Charts() {
               <div className="grid flex-1 auto-rows-min gap-0.5">
                 <div className="text-xs text-muted-foreground">Xe ra</div>
                 <div className="flex items-baseline gap-1 text-2xl font-bold tabular-nums leading-none">
-                  34
+                  {Number(data2.out)}
                   <span className="text-sm font-normal text-muted-foreground">
                     Xe
                   </span>
@@ -189,7 +175,7 @@ export function Charts() {
 
             </div>
           </CardFooter>
-        </Card>
+        </Card>}
       </div>
     </div>
   );
