@@ -69,13 +69,13 @@ export const historyColumns: ColumnDef<History>[] = [
     },
   },
   {
-    accessorKey: 'price',
+    accessorKey: 'ticketType',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title={ConvertColumnIDs['ticketType']} />
     ),
     cell: ({ row }) => {
-      const bill = row.getValue('price') as any;
-      return <div>{+bill ? 'Vé ngày' : 'Vé tháng'}</div>;
+      const bill = row.getValue('ticketType') as any;
+      return <div>{bill}</div>;
     },
   },
 ];
