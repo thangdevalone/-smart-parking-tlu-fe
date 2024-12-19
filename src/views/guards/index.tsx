@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CameraGroup from '@/views/guards/components/camera-group.tsx';
 import ActionGroup from '@/views/guards/components/action-group.tsx';
 import HistoryGroup from '@/views/guards/components/history-group.tsx';
-import StatisticGroup from '@/views/guards/components/statistic-group.tsx';
 import { off, onValue, ref, set } from 'firebase/database';
 import { database } from '@/firebase.ts';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog.tsx';
@@ -140,9 +139,6 @@ const GuardViews: React.FC = () => {
             <div className="flex-1 grid grid-rows-3">
               <div className="row-span-2">
                 <HistoryGroup />
-              </div>
-              <div className="row-span-1 hidden xl:block">
-                <StatisticGroup />
               </div>
             </div>
             <div className="row-span-2 p-4 lg:hidden border-t block">

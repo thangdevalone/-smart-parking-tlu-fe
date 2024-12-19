@@ -2,7 +2,6 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox.tsx';
 import { DataTableColumnHeader } from '@/components/common/data-table/data-table-column-header.tsx';
 import { User } from '@/types';
-import { UserHandler } from '@/views/manager-system/user/table/user-handler.tsx';
 
 export const userColumns: ColumnDef<User>[] = [
   {
@@ -73,8 +72,5 @@ export const userColumns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => <div>{row.getValue('phone') || '-'}</div>,
   },
-  {
-    id: 'actions',
-    cell: ({ row }) => (<UserHandler row={row} />),
-  },
+
 ];
