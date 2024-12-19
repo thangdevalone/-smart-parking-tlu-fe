@@ -43,13 +43,13 @@ const GuardViews: React.FC = () => {
   const checkin = async () => {
     setImageIn(appConfig.cam_in + '/capture');
     await set(ref(database, '/gates/gate_1/card_id'), '');
-    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAi: withAi });
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAI: withAi });
     setRes(res.data);
   };
   const checkout = async () => {
     setImageOut(appConfig.cam_out + '/capture');
     await set(ref(database, '/gates/gate_2/card_id'), '');
-    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAi: withAi });
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAI: withAi });
     setRes2(res.data);
   };
 

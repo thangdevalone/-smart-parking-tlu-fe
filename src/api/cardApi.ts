@@ -39,7 +39,7 @@ export const cardApi = {
     data.cardType = Number(data.cardType);
     return await axiosClient.post<SuccessResponse<Card>>(url, data);
   },
-  async checkin(data: { cardId: string, imageUrl: string, withAi: boolean }) {
+  async checkin(data: { cardId: string, imageUrl: string, withAI: boolean }) {
     const url = `/ticket/checkin`;
     return await axiosClient.post(url, data);
   },
