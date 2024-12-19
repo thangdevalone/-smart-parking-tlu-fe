@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { appConfig } from '@/configs';
 import { ToggleGateInButton, ToggleGateOutButton } from '@/views/guards/components/action.tsx';
 import { cardApi } from '@/api/cardApi.ts';
+import { useActionGroupStore } from '@/store/withAi-store.ts';
 
 
 const GuardViews: React.FC = () => {
@@ -20,7 +21,7 @@ const GuardViews: React.FC = () => {
   const [imageOut, setImageOut] = useState<string>('');
   const [res, setRes] = useState<any>();
   const [res2, setRes2] = useState<any>();
-
+  const { withAi } = useActionGroupStore();
   useEffect(() => {
     const connectorGateIn = ref(database, '/gates/gate_1/card_id');
     const connectorGateOut = ref(database, '/gates/gate_2/card_id');
@@ -42,13 +43,13 @@ const GuardViews: React.FC = () => {
   const checkin = async () => {
     setImageIn(appConfig.cam_in + '/capture');
     await set(ref(database, '/gates/gate_1/card_id'), '');
-    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAi: withAi });
     setRes(res.data);
   };
   const checkout = async () => {
     setImageOut(appConfig.cam_out + '/capture');
     await set(ref(database, '/gates/gate_2/card_id'), '');
-    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture' });
+    const res = await cardApi.checkin({ cardId: gateInCard, imageUrl: appConfig.cam_in + '/capture', withAi: withAi });
     setRes2(res.data);
   };
 
@@ -67,7 +68,7 @@ const GuardViews: React.FC = () => {
     <main className="h-[calc(100vh_-_70px)] flex flex-row">
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="w-[800px]">
+        <DialogContent className="min-w-[800px] max-w-none">
           <DialogHeader>
             <DialogTitle>Quét thẻ cổng vào thành công</DialogTitle>
           </DialogHeader>
@@ -77,7 +78,7 @@ const GuardViews: React.FC = () => {
                 Cổng vào
               </div>
               <img
-                className="h-full aspect-square rounded-md"
+                className="h-full aspect-square w-[300px] rounded-md"
                 src={imageIn}
                 alt="imagein" />
             </div>
@@ -99,7 +100,7 @@ const GuardViews: React.FC = () => {
                 Cổng vào
               </div>
               <img
-                className="h-full aspect-square rounded-md"
+                className="h-full aspect-square w-[300px] rounded-md"
                 src={res2?.imageIn}
                 alt="imagein" />
             </div>
@@ -109,7 +110,7 @@ const GuardViews: React.FC = () => {
               </div>
               {res?.timeOut ? (
                 <img
-                  className="h-full aspect-square rounded-md"
+                  className="h-full aspect-square w-[300px] rounded-md"
                   src={imageOut}
                   alt="imageout"
                 />

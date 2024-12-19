@@ -186,7 +186,7 @@ export default function UserFormPage() {
               <Button type="button" onClick={() => navigateAppPath(['/users'])} variant="secondary">
                 Cancel
               </Button>
-              <Button type={'submit'}>
+              <Button loading={mutation?.isPending} type={'submit'}>
                 Lưu & tạo mới
               </Button>
             </motion.div>
